@@ -7,7 +7,12 @@ class Cliente{
 // Constructor
   Cliente(this._gestor);
 
-  List<Producto> enviarPeticion(List<Producto> productos, List<int> valorFiltros){
+/**
+ * @brief Envía la petición al filter manager y devuelve la lista de productos filtrada
+ * @param producto Lista de productos
+ * @param valorFiltros Lista de filtros que se van a aplicar
+*/
+  void enviarPeticion(List<Producto> productos, List<int> valorFiltros){
     return _gestor.filterResquest(productos, valorFiltros);
   }
 }

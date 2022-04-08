@@ -1,5 +1,5 @@
 enum EstadoProducto{
-  nuevo,
-  usado,
-  roto
+  nuevo, // 0
+  usado, // 1
+  roto // 2
 }
