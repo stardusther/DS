@@ -1,8 +1,4 @@
 class Objetivo{
-<<<<<<< Updated upstream
-    // métodos completar!!!!
-    void ejecutar(List<Productos>) productos, List<int> valorFiltros;
-=======
     /**
     * @brief Método que saca por pantalla los productos filtrados por las categorías seleccionadas
     */
@@ -26,5 +22,4 @@ class Objetivo{
         print("--------------------------------------------------------");
       }
     }
->>>>>>> Stashed changes
 }
