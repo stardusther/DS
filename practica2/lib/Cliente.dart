@@ -10,4 +10,8 @@ class Cliente{
   List<Producto> enviarPeticion(List<Producto> productos, List<int> valorFiltros){
     return _gestor.filterResquest(productos, valorFiltros);
   }
+
+  void set setGestorFiltros(GestorFiltros g){
+    _gestor = g;
+  }
 }
