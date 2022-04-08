@@ -5,7 +5,7 @@ class FiltroPrecio implements Filtro{
       var resultado;
 
       for(var i = 0; i < productos.length; i++){
-        if(productos.get(i)._precio <= valor) // si el precio es menor o igual al de la búsqueda
+        if(productos[i]._precio <= valor) // si el precio es menor o igual al de la búsqueda
           resultado.add(productos.get(i));
       }
     }

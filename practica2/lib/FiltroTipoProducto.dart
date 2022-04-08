@@ -6,7 +6,7 @@ class FiltroTipoProducto implements Filtro{
       var resultado;
 
       for(var i = 0; i < productos.length; i++){
-        if(productos.get(i)._tipo == TipoProducto.values(valor)) // si el tipo coincide con el de la búsqueda
+        if(productos[i]._tipo == TipoProducto.values(valor)) // si el tipo coincide con el de la búsqueda
           resultado.add(productos.get(i));
       }
     }
