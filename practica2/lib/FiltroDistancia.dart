@@ -5,7 +5,7 @@ class FiltroDistancia implements Filtro {
     if(!productos.isEmpty()){ //Si la lista de productos no está vacía
       var resultado;
 
-      for(var i = 0; i < productos.size(); i++){
+      for(var i = 0; i < productos.length; i++){
         if(productos.get(i)._distancia <= valor) // si la distancia es menor o igual a la de la búsqueda
           resultado.add(productos.get(i));
       }
