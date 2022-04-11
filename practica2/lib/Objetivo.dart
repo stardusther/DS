@@ -1,17 +1,19 @@
+import 'Producto.dart';
+
 class Objetivo{
     /**
     * @brief Método que saca por pantalla los productos filtrados por las categorías seleccionadas
     * @param valorFiltros Array de valores de filtros
     */
-    void ejecutar(List<Productos> productos, var valorFiltros){
+    void ejecutar(List<Producto> productos, var valorFiltros){
 
       for(var i = 0; i < productos.length; i++){
-        var nombre = productos[i]._nombre;
-        var precio = productos[i]._precio;
-        var distancia = productos[i]._distancia;
-        var descripcion = productos[i]._descripcion;
-        var estado = productos[i]._estado.toString().split('.').last; // ej: de "EstadoProducto.roto" imprime "roto"
-        var tipo = productos[i]._tipo.toString().split('.').last;
+        var nombre = productos[i].nombre;
+        var precio = productos[i].precio;
+        var distancia = productos[i].distancia;
+        var descripcion = productos[i].descripcion;
+        var estado = productos[i].estado.toString().split('.').last; // ej: de "EstadoProducto.roto" imprime "roto"
+        var tipo = productos[i].tipo.toString().split('.').last;
 
         print("---------------------- PRODUCTO $i ----------------------");
         print("Nombre: $nombre");

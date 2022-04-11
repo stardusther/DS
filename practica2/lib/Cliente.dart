@@ -12,7 +12,7 @@ class Cliente{
  * @param producto Lista de productos
  * @param valorFiltros Lista de filtros que se van a aplicar
 */
-  void enviarPeticion(List<Producto> productos, List<int> valorFiltros){
+  List<Producto> enviarPeticion(List<Producto> productos, List<int> valorFiltros){
     return _gestor.filterResquest(productos, valorFiltros);
   }
 

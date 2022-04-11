@@ -25,6 +25,8 @@ class CadenaFiltros{
       }
 
       _objetivo.ejecutar(productosFiltrados, valorFiltros); // E: no estoy segura de qué parámetros pasarle
+
+      return productosFiltrados;
     }
 
     void aniadirFiltro(Filtro f){ //precio, distancia, tipo y estado
