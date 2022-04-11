@@ -1,8 +1,9 @@
 class Objetivo{
     /**
     * @brief Método que saca por pantalla los productos filtrados por las categorías seleccionadas
+    * @param valorFiltros Array de valores de filtros
     */
-    void ejecutar(List<Productos> productos, List<int> valorFiltros){
+    void ejecutar(List<Productos> productos, var valorFiltros){
 
       for(var i = 0; i < productos.length; i++){
         var nombre = productos[i]._nombre;
