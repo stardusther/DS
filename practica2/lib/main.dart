@@ -12,9 +12,18 @@ import 'FiltroEstadoProducto.dart';
 import 'FiltroTipoProducto.dart';
 
 void main(List<String> arguments){
-  print("Introduce un tipo de producto: ------------------------------------------------------------");
+  // crear gestor de filtros
+  GestorFiltros gestorFiltros = new GestorFiltros();
 
-//  Producto( this._precio, this._distancia,  this._nombre, this._descripcion, this._tipoProducto, this._estado);
+  // Añadir los filtros
+  gestorFiltros.setFiltro(new FiltroPrecio());
+  gestorFiltros.setFiltro(new FiltroPrecio());
+  gestorFiltros.setFiltro(new FiltroPrecio());
+  gestorFiltros.setFiltro(new FiltroPrecio());
+
+
+
+// Creacion de productos
   Producto producto1 = new Producto(10, 10, "Cuadro Mona Lisa", "Un cuadro sin más de mi abuela", TipoProducto.cuadro, EstadoProducto.nuevo);
   Producto producto2 = new Producto(200, 2, "Lapiz 2B", "Un lápiz bonito", TipoProducto.lapices, EstadoProducto.bueno);
   Producto producto3 = new Producto(500, 300, "Escultura David", "Escultura bien fachera", TipoProducto.escultura, EstadoProducto.bueno);
