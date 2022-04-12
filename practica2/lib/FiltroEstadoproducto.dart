@@ -12,7 +12,7 @@ class FiltroEstadoProducto implements Filtro{
         if(productos[i].estado == EstadoProducto.values[valor[j]]) // si el estado coincide con el de la búsqueda
         {
           resultado.add(productos[i]);
-          productos.removeAt(i); //borrar elemento i, para no volver a pasar por él en la lista
+          //productos.removeAt(i); //Borrariamos los que ya hemos metido
         }
       }
     }

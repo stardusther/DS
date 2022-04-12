@@ -15,14 +15,15 @@ class Objetivo{
         var estado = productos[i].estado.toString().split('.').last; // ej: de "EstadoProducto.roto" imprime "roto"
         var tipo = productos[i].tipo.toString().split('.').last;
 
-        print("---------------------- PRODUCTO $i ----------------------");
+        var j = i+1;
+
+        print("---------------------- PRODUCTO $j ----------------------");
         print("Nombre: $nombre");
         print("Precio: $precio");
         print("Distancia: $distancia");
         print("Descripcion: $descripcion");
         print("Estado: $estado");
         print("Tipo: $tipo");
-        print("--------------------------------------------------------");
       }
     }
 }
