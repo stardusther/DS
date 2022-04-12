@@ -16,11 +16,6 @@ import 'dart:io';
 import 'dart:convert';
 
 void main(List<String> arguments){
-<<<<<<< Updated upstream
-  print("Introduce un tipo de producto: ------------------------------------------------------------");
-
-//  Producto( this._precio, this._distancia,  this._nombre, this._descripcion, this._tipoProducto, this._estado);
-=======
   // crear gestor de filtros
   GestorFiltros gestorFiltros = new GestorFiltros(new Objetivo());
 
