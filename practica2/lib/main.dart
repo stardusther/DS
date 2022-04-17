@@ -1,3 +1,5 @@
+import 'package:practica2/Vista.dart';
+
 import 'Producto.dart';
 import 'TipoProducto.dart';
 import 'EstadoProducto.dart';
@@ -10,17 +12,15 @@ import 'FiltroPrecio.dart';
 import 'FiltroDistancia.dart';
 import 'FiltroEstadoProducto.dart';
 import 'FiltroTipoProducto.dart';
+import 'Controlador.dart';
 
-/*
-import 'dart:async';
-import 'dart:io';
-import 'dart:convert';
-*/
+import 'package:flutter/material.dart';
 
-
-void main(List<String> arguments){
-  // crear gestor de filtros
-  GestorFiltros gestorFiltros = new GestorFiltros(new Objetivo());
+void main()
+{
+  // Crear gestor de filtros y Objetivo
+  Objetivo objetivo = new Objetivo();
+  GestorFiltros gestorFiltros = new GestorFiltros(objetivo);
 
   // Añadir los filtros (orden: precio, distancia, estado y tipo)
   gestorFiltros.setFiltro = new FiltroPrecio();
@@ -31,28 +31,28 @@ void main(List<String> arguments){
   // Crear Cliente
   Cliente cliente = new Cliente();
 
-  // Set filter filterManager
+  // Añadirle al cliente el gestor de filtros
   cliente.setGestorFiltros = gestorFiltros;
 
-// Creacion de productos
-
+  // Creacion de un catalogo de productos
   Producto producto1 = new Producto(10, 10, "Cuadro Mona Lisa", "Un cuadro sin más de mi abuela", TipoProducto.cuadro, EstadoProducto.nuevo);
   Producto producto2 = new Producto(200, 2, "Lapiz 2B", "Un lápiz bonito", TipoProducto.lapices, EstadoProducto.bueno);
   Producto producto3 = new Producto(500, 300, "Escultura David", "Escultura bien fachera", TipoProducto.escultura, EstadoProducto.bueno);
-  Producto producto4 = new Producto(100, 55, "Caballete marrón", "Cabellete casi sin usar", TipoProducto.caballete, EstadoProducto.excelente);
+  Producto producto4 = new Producto(100, 55, "Caballete marrón", "Caballete casi sin usar", TipoProducto.caballete, EstadoProducto.excelente);
   Producto producto5 = new Producto(3, 80, "Cuadro casero", "Le he dedicado muchas horas merece la pena", TipoProducto.cuadro, EstadoProducto.nuevo);
   Producto producto6 = new Producto(12, 3,  "Pincelito", "Pincelito para pintar", TipoProducto.pincel, EstadoProducto.bueno);
-  Producto producto7 = new Producto(16.5, 1, "Acuarela", "Acuarela dije", TipoProducto.pinturas, EstadoProducto.roto);
-  Producto producto8 = new Producto(5, 1.21, "Lienzo", "Aqui dibujaba Piccaso", TipoProducto.lienzo, EstadoProducto.roto);
+  Producto producto7 = new Producto(16.55, 1, "Acuarela", "Acuarela dije", TipoProducto.pinturas, EstadoProducto.roto);
+  Producto producto8 = new Producto(5, 2, "Lienzo", "Aqui dibujaba Piccaso", TipoProducto.lienzo, EstadoProducto.roto);
   Producto producto9 = new Producto(1, 1, "Lapiz roto robado", "Lapiz de mi colega de clase", TipoProducto.lapices, EstadoProducto.roto);
   Producto producto10 = new Producto(300, 3, "Pincel de acuarela", "Me vinieron dos pero solo quería uno, esta sin usar", TipoProducto.pincel, EstadoProducto.excelente);
-  Producto producto11 = new Producto(1200, 12.6, "Escultura de Hasbulla", "Escultura de Hasbulla 2", TipoProducto.escultura, EstadoProducto.bueno);
-  Producto producto12 = new Producto(20000, 5, "Cuadro Picasso", "Cuadro de Picasso de su etapa en París", TipoProducto.lapices, EstadoProducto.excelente);
+  Producto producto11 = new Producto(200, 7, "Escultura de Hasbulla", "Escultura de Hasbulla 2", TipoProducto.escultura, EstadoProducto.bueno);
+  Producto producto12 = new Producto(350, 5, "Cuadro Picassito", "Cuadro de Picasso de su etapa en París", TipoProducto.lapices, EstadoProducto.excelente);
   Producto producto13 = new Producto(20, 15, "Pinturas acrílicas", "Perfectas para tus cuadros", TipoProducto.pinturas, EstadoProducto.nuevo);
   Producto producto14 = new Producto(1, 500, "Pintura industrial", "Perfectas para tu empresa", TipoProducto.pinturas, EstadoProducto.nuevo); 
-  Producto producto15 = new Producto(690, 55.3, "Escultura de Dios", "No se de donde saque esto", TipoProducto.escultura, EstadoProducto.excelente);
+  Producto producto15 = new Producto(235, 55.3, "Escultura de Dios", "No se de donde saque esto", TipoProducto.escultura, EstadoProducto.excelente);
+  Producto producto16 = new Producto(5, 7, "Caballete (o eso creo)", "No sé que es, pero lo vendo", TipoProducto.caballete, EstadoProducto.roto);
 
-  // añadir al catálogo
+  // Crear catalogo - coleccion de productos
   List<Producto> catalogo = [];
 
   catalogo.add(producto1);
@@ -70,120 +70,336 @@ void main(List<String> arguments){
   catalogo.add(producto13);
   catalogo.add(producto14);
   catalogo.add(producto15);
+  catalogo.add(producto16);
 
-  //Preguntar por filtros a aplicar
+  // Crear controlador y vista. Sobre el controlador haremos peticiones y sobre la vista veremos los resultados
+  Controlador controlador = new Controlador(cliente, catalogo);
+  Vista vista = new Vista(objetivo, catalogo);
 
-  List<List<int>> matriz_filtros = [];
+  //Creamos filtros
+  List<int> listaFiltro1 = [];
+  List<int> listaFiltro2 = [];
+  List<int> listaFiltro3 = [];
+  List<int> listaFiltro4 = [];
 
-  List<int> lista_filtro1 = [];
-  List<int> lista_filtro2 = [];
-  List<int> lista_filtro3 = [];
-  List<int> lista_filtro4 = [];
+  /*
+  //Modificamos los valores para los filtros que le pasaremos al controlador
+  lista_filtro1.add(-1);
+  controlador.modificarFiltro(0,lista_filtro1);
 
-  //Precio -> Solo un entero
-  lista_filtro1.add(100);
+  lista_filtro2.add(-1);
+  controlador.modificarFiltro(1,lista_filtro2);
 
-  //Distancia -> Solo un entero
-  lista_filtro2.add(20);
-  
-  //EstadoProducto -> 4 enteros, uno para cada estado
-  lista_filtro3.add(0);
-  lista_filtro3.add(1);
-  lista_filtro3.add(2);
-  lista_filtro3.add(3);
-  //lista_filtro3.add(-1);
+  lista_filtro3.add(-1);
+  controlador.modificarFiltro(2,lista_filtro3);
 
+  lista_filtro4.add(6); //-1 es "no hacer nada" - Por defecto ya esta así el controlador
+  controlador.modificarFiltro(3,lista_filtro4);
+  */
 
-  //TipoProducto -> 7 enteros, uno para cada tipo
-  lista_filtro4.add(-1); //Solo filtramos por un tipo
+  // Ejecutamos con los filtros que le hemos pasado
+  controlador.aplicarFiltros(catalogo);
 
-  matriz_filtros.add(lista_filtro1);
-  matriz_filtros.add(lista_filtro2);
-  matriz_filtros.add(lista_filtro3);
-  matriz_filtros.add(lista_filtro4);
+  //Obtener los productos resultantes a través de la vista 
+  List<Producto> catFinal = vista.getProductosFiltrados();
 
-  //print(matriz_filtros[1]);
-
-  List<Producto> productosFiltrados = cliente.enviarPeticion(catalogo, matriz_filtros);
-                                      
- /* var salir = false;
-
-  while(!salir){
-    print(" \n---------------------------------- MENU ------------------------------ ");
-    print(" [f] Filtrar por precio");
-    print(" [d] Filtrar por distancia");
-    print(" [e] Filtrar por estado");
-    print(" [t] Filtrar por tipo");
-    print(" [s] Salir");
-    print(" ---------------------------------------------------------------------- ");
-
-    var res = stdin.readLineSync();
-
-    if(res == "f"){
-      print(" Escriba un precio tope: ");
-      res = stdin.readLineSync();
-      matrizFiltros[0] = int.parse(res);
-      print(" Guardado: $matrizFiltros");
-    }
-
-    if(res == "d"){
-      print(" Escriba uns distancia tope: ");
-      res = stdin.readLineSync();
-      matrizFiltros[1] = int.parse(res);
-      print(" Guardado: $matrizFiltros");
-    }
-
-    if(res == "e"){
-      var terminar = false;
-      var i = 0;
-      List<int> lista = [];
-
-      while (!terminar){
-        print(" ¿Por qué estado(s) quiere filtrar? ");
-        print(" [0] Nuevo");
-        print(" [1] Excelente");
-        print(" [2] Bueno");
-        print(" [3] Roto");
-
-        res = stdin.readLineSync();
-
-        if(res == "x"){
-            terminar = true;
-            matrizFiltros[2].add(lista);
-        } else{
-            lista.add(int.parse(res));
-            print(" Guardado: $lista");
-        }
-      }
-    }
-
-    if(res == "t"){
-      var terminar = false;
-
-      while (!terminar){
-        print(" ¿Por qué tipo quiere filtrar? ");
-        print(" [0] Cuadros");
-        print(" [1] Lienzos");
-        print(" [2] Pinceles");
-        print(" [3] Lápices");
-        print(" [4] Caballetes");
-        print(" [5] Esculturas");
-        print(" [6] Pinturas");
-        
-        res = stdin.readLineSync();
-        if(res == "x")
-          terminar = true;
-        else{
-            matrizFiltros[3].add(int.parse(res));
-            print(" Guardado: $matrizFiltros");
-        }
-        
-      }
-    }
-
-    if(res == "s")
-      salir = true;
-  }*/
-    
+  //////////////////////////////////////////////////////////////////////
+  //Parte de flutter
+  //Añadir parte correspondiente a crear Pantalla en flutter
+  runApp(MyApp(vista, controlador));
 
 }
+
+class MyApp extends StatelessWidget 
+{
+  Vista? _vista = null; //Inicialmente a null
+  Controlador? _controlador = null;
+
+  MyApp(Vista vista, Controlador controlador, {Key? key}) : //Constructor - key se puede enviiar o no
+    _vista = vista,
+    _controlador = controlador,
+    super(key: key);
+
+  // Root de la aplicacion
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Compra-Venta de Arte',
+      theme: ThemeData(
+        primarySwatch: Colors.deepOrange,
+      ),
+      home: MyHomePage("Filtros de Productos Artísticos", _vista!, _controlador!), //! para no null
+    );
+  }
+} //Fin de la clase MyApp
+
+class MyHomePage extends StatefulWidget {
+  
+  String title;
+  Vista _vista;
+  Controlador _controlador;
+
+  MyHomePage(String title, Vista vista, Controlador controlador, {Key? key}) :
+    this.title = title,
+    _vista = vista,
+    _controlador = controlador,
+    super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  double _valor_actual_precios = 0;
+  double _valor_actual_distancia = 0;
+  String? _valor_tipo = 'Ninguno';
+  final _tipos_producto = ['Ninguno','Cuadro', 'Lienzo', 'Pincel', 'Lapices','Caballete', 'Escultura', 'Pinturas'];
+  List<bool> _estados_seleccionados = List.generate(4, (_) => false); //4 porque tenemos 4 estados. 
+
+  //Mejora para los _slider y selector :  no usar número mágicos (posible actualizacion)
+  void _sliderDistancia() {
+    int valor_filtro = _valor_actual_distancia.round();
+    if(_valor_actual_distancia.round()== 0) //Si es 0, no aplicar filtro
+      valor_filtro = -1;
+
+    widget._controlador.modificarFiltro(1, [valor_filtro]);//Modificar el filtro de distancia con el valor dado
+    //print("$_valor_actual_precios");
+  }
+
+  void _sliderPrecio() {
+    int valor_filtro = _valor_actual_precios.round();
+    if(_valor_actual_precios.round()== 0) //Si es 0, no aplicar filtro
+      valor_filtro = -1;
+
+    widget._controlador.modificarFiltro(0, [valor_filtro]); //Modificar el filtro de precio con el valor dado
+    //print("$_valor_actual_precios");
+  }
+
+  void _selectorTipo() {
+    if(_valor_tipo == 'Ninguno')
+      widget._controlador.modificarFiltro(3, [-1]);      
+    else if(_valor_tipo == 'Cuadro')
+      widget._controlador.modificarFiltro(3, [0]); 
+    else if(_valor_tipo == 'Lienzo')
+      widget._controlador.modificarFiltro(3, [1]); 
+    else if(_valor_tipo == 'Pincel')
+      widget._controlador.modificarFiltro(3, [2]); 
+    else if(_valor_tipo == 'Lapices')
+      widget._controlador.modificarFiltro(3, [3]); 
+    else if(_valor_tipo == 'Caballete')
+      widget._controlador.modificarFiltro(3, [4]); 
+    else if(_valor_tipo == 'Escultura')
+      widget._controlador.modificarFiltro(3, [5]); 
+    else if(_valor_tipo == 'Pinturas')
+      widget._controlador.modificarFiltro(3, [6]);     
+  }
+
+  void _selectorEstados(){
+    List<int> estados = [];
+
+    for(int i = 0 ; i < _estados_seleccionados.length ; i++){
+      if(_estados_seleccionados[i])
+        estados.add(i);
+    }
+
+    if(estados.isEmpty) //Si no hay boton seleccionado, mostrar todos
+      estados.add(-1); 
+
+    widget._controlador.modificarFiltro(2, estados); 
+  }
+
+  void _aplicarFiltros(){
+    setState((){
+      _sliderPrecio();
+      _sliderDistancia();
+      _selectorTipo();
+      _selectorEstados();
+      widget._controlador.aplicarFiltros(widget._controlador.catalogo_inicial);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) { //Llamado cada vez que llamamos a setState y para crear todo
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title), //Coger valor de MyHomePage
+      ),
+
+      //Faltaria parte de botones ¿Container de columna?
+
+      body: SingleChildScrollView(
+        child : Center( //Colocar en medio
+          child: Column( //Coge lista de hijos y los coloca verticalmente
+            //mainAxisAlignment: MainAxisAlignment.end, //Abajo verticalmente
+            children: <Widget>[
+              Container( //Metemos botones, y le ponemos borde a la zona de botones
+                margin: const EdgeInsets.only(top: 2, bottom: 2, right: 10, left: 10),
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFE0C2), ///color naranjita
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 1.5,
+                  ),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+
+                child: Column( //Botones y textos
+                  children: <Widget>[
+                    Text("Filtro Precio: "),
+                    Slider( //Paquete flutter_xlider y funcion para divisiones customs
+                      min: 0,
+                      max: 250,
+                      divisions: 25,
+                      label: "$_valor_actual_precios",
+                      value: _valor_actual_precios,
+                      onChanged: (nuevoRating){
+                        setState(() => _valor_actual_precios = nuevoRating);
+                      },
+                    ),
+
+                    Text("Filtro Distancia: "),
+                    Slider( //Paquete flutter_xlider y funcion para divisiones customs
+                      min: 0,
+                      max: 200,
+                      divisions: 10,
+                      label: "$_valor_actual_distancia",
+                      value: _valor_actual_distancia,
+                      onChanged: (nuevoRating){
+                        setState(() => _valor_actual_distancia = nuevoRating);
+                      },
+                    ),
+                    
+                    
+                    Text("Filtro Tipo:"),
+                    DropdownButton<String>(
+                      value: _valor_tipo,
+                      items: _tipos_producto.map(buildMenuItem).toList(),
+                      onChanged: (valor){
+                        setState(() => _valor_tipo = valor);
+                      },
+                    ),
+
+                    Text("Filtro Estado:"),
+                    ToggleButtons(
+                      children: const <Widget>[
+                        Text('Nuevo'),
+                        Text('Excelente'),
+                        Text('Bueno'),
+                        Text('Roto'),
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                      borderWidth: 3,
+                      borderColor: Color(0xFF939393),
+                      isSelected: _estados_seleccionados,
+                      onPressed: (int index){
+                        setState((){
+                          _estados_seleccionados[index] = !_estados_seleccionados[index];
+                        });
+                      },
+                    ),  
+                    
+
+                    SizedBox( //Boton para aplicar los filtros
+                      child : FlatButton(
+                        onPressed: _aplicarFiltros, 
+                        child: Text('Aplicar Filtros'),
+                        color: Colors.blueAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(1000)
+                        ),
+                      )
+                    ),
+                  ]
+                ),
+              ),
+
+              for(int i = 0 ; i < widget._vista.getProductosFiltrados().length ; i++)
+                widget._vista.getProductosFiltradosWidget()[i],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  DropdownMenuItem<String> buildMenuItem(String item) => //Crear para cada item, para seleccionar
+    DropdownMenuItem(
+      value: item,
+      child: 
+        Text(
+          item,
+        ),
+      );
+} //Fin clase estado
+
+// Prueba
+/* 
+class MyApp extends StatelessWidget 
+{
+  Vista? _vista = null; //Inicialmente a null
+  Controlador? _controlador = null;
+
+  MyApp(Vista vista, Controlador controlador, {Key? key}) : //Constructor - key se puede enviiar o no
+    _vista = vista,
+    _controlador = controlador,
+    super(key: key);
+
+  // Root de la aplicacion
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Compra-Venta de Arte',
+      theme: ThemeData(
+        primarySwatch: Colors.deepOrange,
+      ),
+      home: const MyHomePage(title: 'Filtros de Productos Artísticos'),
+    );
+  }
+} //Fin de la clase MyApp
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  // Tiene atributos usados en el estado
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() //Llamada para indicar que ha cambiado el estado al llamar a incrementar y que refresque pantalla con cambios
+    {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) { //Llamado cada vez que llamamos a setState y para crear todo
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title), //Coger valor de MyHomePage
+      ),
+      body: Center( //Colocar en medio
+        child: Column( //Coge lista de hijos y los coloca verticalmente
+          mainAxisAlignment: MainAxisAlignment.center, //Centrado (sobre eje y)
+          children: <Widget>[
+            const Text('You have pushed the button this many times:',), //Hijo 1 
+            Text('$_counter', style: Theme.of(context).textTheme.headline4,), //Hijo2
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter, //Llama a _incrementCounter cuando se pulsa
+        tooltip: 'Increment', //Texto describiendo gesto. Cuando pones cursos encima
+        child: const Icon(Icons.add), //Icono del boton
+      ),
+    );
+  }
+} //Fin clase estado
+*/

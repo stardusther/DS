@@ -1,12 +1,18 @@
 import 'Producto.dart';
 
 class Objetivo{
+    List<Producto> _catalogo_final = []; 
+
+    List<Producto> get catalogo_final => _catalogo_final;
+
     /**
     * @brief Método que saca por pantalla los productos filtrados por las categorías seleccionadas
     * @param valorFiltros Array de valores de filtros
     */
     void ejecutar(List<Producto> productos, var valorFiltros){
-
+      _catalogo_final = productos;
+      
+      print("Resumen de Objetivo: ");
       for(var i = 0; i < productos.length; i++){
         var nombre = productos[i].nombre;
         var precio = productos[i].precio;
