@@ -19,7 +19,7 @@ class GestorFiltros{
       _cadena!.aniadirFiltro(f); 
     }
 
-    List<Producto> filterResquest(List<Producto> productos, List<int> valorFiltros)
+    List<Producto> filterResquest(List<Producto> productos, List<List<int>> valorFiltros)
     {
       return _cadena!.ejecutar(productos, valorFiltros); //Si no es nula la cadena ! //Add Null Check
     }

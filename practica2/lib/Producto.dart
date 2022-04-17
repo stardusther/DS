@@ -5,11 +5,13 @@ class Producto
 {
 // Declaración de variables
   double _precio = 0.0;
-  double _distancia = 0.0;
+  double _distancia = 0.0; //en km
   var _nombre = "";
   var _descripcion = "";
   EstadoProducto _estado= EstadoProducto.nuevo;
   TipoProducto _tipoProducto = TipoProducto.lapices;
+  //añadir foto ¿url  
+  //varl url = "http://algo.com"
 
 // Getters y Setters
   double get precio => _precio;
