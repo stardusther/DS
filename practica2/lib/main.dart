@@ -226,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
       //Faltaria parte de botones ¿Container de columna?
-
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child : Center( //Colocar en medio
           child: Column( //Coge lista de hijos y los coloca verticalmente
@@ -236,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 margin: const EdgeInsets.only(top: 2, bottom: 2, right: 10, left: 10),
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
-                  color: Color(0xFFFFE0C2), ///color naranjita
+                  color: Color(0xFFFFE0C2), //color naranjita
                   border: Border.all(
                     color: Colors.black,
                     width: 1.5,
@@ -281,7 +281,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
 
                     Text("Filtro Estado:"),
-                    ToggleButtons(
+                   /* ToggleButtons(
                       children: const <Widget>[
                         Text('Nuevo'),
                         Text('Excelente'),
@@ -297,7 +297,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           _estados_seleccionados[index] = !_estados_seleccionados[index];
                         });
                       },
-                    ),  
+                    ),  */
                     
 
                     SizedBox( //Boton para aplicar los filtros
@@ -315,7 +315,55 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
 
               for(int i = 0 ; i < widget._vista.getProductosFiltrados().length ; i++)
-                widget._vista.getProductosFiltradosWidget()[i],
+                Container(
+                  margin: const EdgeInsets.only(top: 2.5, bottom: 2.5, right: 10, left: 10),
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.orange,
+                        width: 1.5,
+                        ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+
+                  child: Column(
+                    children: <Widget>[
+                      widget._vista.getProductosFiltradosWidget()[i],
+
+                       if(widget._vista.getCatalogo()[i].nombre == "Lapiz 2B")
+                            FlatButton(
+                            onPressed: () {
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Compra()),
+                            );
+                            },
+                            child: const Icon(Icons.shopping_cart) ,
+                            color: Colors.blueAccent,
+                            shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(1000)
+                            ),
+                            ),
+
+                      if(widget._vista.getCatalogo()[i].nombre != "Lapiz 2B")
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Compra()),
+                            );
+                          },
+                          child: Text("Comprar " + widget._vista.getCatalogo()[i].nombre),
+                          color: Colors.blueAccent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(1000)
+                          ),
+                        ),
+                    ]
+                  ),
+                ),
+
             ],
           ),
         ),
@@ -333,73 +381,27 @@ class _MyHomePageState extends State<MyHomePage> {
       );
 } //Fin clase estado
 
-// Prueba
-/* 
-class MyApp extends StatelessWidget 
-{
-  Vista? _vista = null; //Inicialmente a null
-  Controlador? _controlador = null;
-
-  MyApp(Vista vista, Controlador controlador, {Key? key}) : //Constructor - key se puede enviiar o no
-    _vista = vista,
-    _controlador = controlador,
-    super(key: key);
-
-  // Root de la aplicacion
+class Compra extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Compra-Venta de Arte',
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-      ),
-      home: const MyHomePage(title: 'Filtros de Productos Artísticos'),
-    );
-  }
-} //Fin de la clase MyApp
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // Tiene atributos usados en el estado
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() //Llamada para indicar que ha cambiado el estado al llamar a incrementar y que refresque pantalla con cambios
-    {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) { //Llamado cada vez que llamamos a setState y para crear todo
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title), //Coger valor de MyHomePage
+        title: Text("Compra"),
       ),
-      body: Center( //Colocar en medio
-        child: Column( //Coge lista de hijos y los coloca verticalmente
-          mainAxisAlignment: MainAxisAlignment.center, //Centrado (sobre eje y)
+      body: Center(
+        child: Column(
           children: <Widget>[
-            const Text('You have pushed the button this many times:',), //Hijo 1 
-            Text('$_counter', style: Theme.of(context).textTheme.headline4,), //Hijo2
-          ],
+            Text("¡El producto se ha comprado con éxito! "),
+
+            RaisedButton(
+              onPressed: () {
+                Navigator.pop(context); //Regresar a pantalla principal
+              },
+              child: Text('Volver a página principal'),
+            ),
+          ]
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter, //Llama a _incrementCounter cuando se pulsa
-        tooltip: 'Increment', //Texto describiendo gesto. Cuando pones cursos encima
-        child: const Icon(Icons.add), //Icono del boton
       ),
     );
   }
-} //Fin clase estado
-*/
+}

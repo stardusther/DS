@@ -2,8 +2,9 @@
 
 import 'Producto.dart';
 import 'Objetivo.dart';
-
+import 'main.dart'; //Para navegar en interfaz a compra
 import 'package:flutter/material.dart';
+
 
 class Vista
 {
@@ -64,6 +65,7 @@ class Vista
     for(var i = 0; i < _catalogo_final.length; i++)
     {
       tmp = Container( 
+        /*
         margin: const EdgeInsets.only(top: 2.5, bottom: 2.5, right: 10, left: 10),
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
@@ -73,7 +75,7 @@ class Vista
             width: 1.5,
             ),
           borderRadius: BorderRadius.circular(5),
-        ),
+        ),*/
         child: Column( //porque container solo tiene un hijo
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
