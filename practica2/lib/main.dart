@@ -248,6 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     Text("Filtro Precio: "),
                     Slider( //Paquete flutter_xlider y funcion para divisiones customs
+                      key: const Key('sliderPrecio'),
                       min: 0,
                       max: 250,
                       divisions: 25,
@@ -260,6 +261,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     Text("Filtro Distancia: "),
                     Slider( //Paquete flutter_xlider y funcion para divisiones customs
+                      key: const Key('sliderDistancia'),
                       min: 0,
                       max: 200,
                       divisions: 10,
@@ -281,7 +283,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
 
                     Text("Filtro Estado:"),
-                   /* ToggleButtons(
+                    ToggleButtons(
                       children: const <Widget>[
                         Text('Nuevo'),
                         Text('Excelente'),
@@ -297,7 +299,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           _estados_seleccionados[index] = !_estados_seleccionados[index];
                         });
                       },
-                    ),  */
+                    ),  
                     
 
                     SizedBox( //Boton para aplicar los filtros
@@ -331,7 +333,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: <Widget>[
                       widget._vista.getProductosFiltradosWidget()[i],
 
-                       if(widget._vista.getCatalogo()[i].nombre == "Lapiz 2B")
+                       /*if(widget._vista.getCatalogo()[i].nombre == "Lapiz 2B")
                             FlatButton(
                             onPressed: () {
                             Navigator.push(
@@ -346,7 +348,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             ),
 
-                      if(widget._vista.getCatalogo()[i].nombre != "Lapiz 2B")
+                      if(widget._vista.getCatalogo()[i].nombre != "Lapiz 2B")*/
                         FlatButton(
                           onPressed: () {
                             Navigator.push(
@@ -391,7 +393,7 @@ class Compra extends StatelessWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            Text("¡El producto se ha comprado con éxito! "),
+            Text("¡El producto se ha comprado con éxito!"),
 
             RaisedButton(
               onPressed: () {

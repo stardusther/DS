@@ -83,31 +83,118 @@ void main() {
 
   List<Producto> catFinal = vista.getProductosFiltrados();
 
-
+/**
+ * @brief Test que comprueba la navegabilidad entre la página principal y la de compra de un producto
+ */
   testWidgets('Prueba compra de productos', (WidgetTester tester) async {
 
-    //tester.binding.window.physicalSizeTestValue = const Size(1024, 1024);
     // Build our app and trigger a frame.
-
+    tester.binding.window.physicalSizeTestValue = const Size(720, 1280);
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
     await tester.pumpWidget(MyApp(vista, controlador));
 
     // Verificar que se han cargado bien todos los elementos.
-    expect(find.text('Lapiz 2B'), findsOneWidget); // Debe encontrar uno
+    expect(find.text('Cuadro Mona Lisa'), findsOneWidget); // Debe encontrar uno
     expect(find.text('Pintura del Louvre'), findsNothing); // No debe encontrar nada
 
-    // Tap the '+' icon and trigger a frame.
-   // await tester.tap(find.byType(FlatButton));
-    //await tester.tap(find.descendant(of: find.byType(FlatButton), matching: find.text("Comprar Lapiz 2B")));
+    expect(find.text("Comprar Cuadro Mona Lisa"), findsOneWidget); // Botón comprar
+    await tester.tap(find.text("Comprar Cuadro Mona Lisa")); // Pulsamos el botón
+    await tester.pumpAndSettle();
 
-    // await tester.ensureVisible(find.byIcon(Icons.shopping_cart));
-    //await tester.pumpAndSettle();
-    expect(find.byIcon(Icons.shopping_cart), findsOneWidget);
-    Finder b = find.byIcon(Icons.shopping_cart);
-    await tester.tap(b);
-    await tester.pump(const Duration(milliseconds: 100500));
+    // Comprobar que hemos cambiado de página
+    //expect(find.byType(RaisedButton), findsOneWidget);
+    expect(find.text("¡El producto se ha comprado con éxito!"), findsOneWidget);
 
-    // Verify that our counter has incremented.
+    // Volvemos a la página principal
     expect(find.byType(RaisedButton), findsOneWidget);
-    //expect(find.text('¡El producto se ha comprado con éxito!'), findsOneWidget);
+    await tester.tap(find.byType(RaisedButton)); // Pulsamos el botón
+    await tester.pumpAndSettle();
+
+    // Comprobamos que hemos vuelto a la página principal
+    expect(find.text('Cuadro Mona Lisa'), findsOneWidget); // Debe encontrar uno
+  });
+
+
+/**
+ * @brief Test que comprueba que los sliders de los filtros funcionen
+ */
+  testWidgets('Prueba sliders precio y distancia', (WidgetTester tester) async {
+
+    // Asignamos las claves (keys)
+    const dist = Key('sliderDistancia');
+    const precio = Key('sliderPrecio');
+
+    // Build our app and trigger a frame.
+    tester.binding.window.physicalSizeTestValue = const Size(720, 1280);
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    await tester.pumpWidget(MyApp(vista, controlador));
+
+    // Comprobamos que los productos estén en la página principal
+    expect(find.text('Escultura de Dios'), findsOneWidget);
+    expect(find.text('Lapiz roto robado'), findsOneWidget);
+    expect(find.text('Escultura David'), findsOneWidget);
+
+    // Encontrar el slider correspondiente
+    expect(find.byKey(dist), findsOneWidget);
+    expect(find.byKey(precio), findsOneWidget);
+
+    // Mover el slider
+    await tester.drag(find.byKey(dist), const Offset(80, 0)); // (80km)
+    await tester.pumpAndSettle();
+
+    // Pulsar el botón de aplicar filtros
+    expect(find.text("Aplicar Filtros"), findsOneWidget); // Botón comprar
+    await tester.tap(find.text("Aplicar Filtros")); // Pulsamos el botón
+    await tester.pumpAndSettle();
+
+    // Se reduce la lista de productos
+    expect(find.text('Escultura de Dios'), findsOneWidget);
+    expect(find.text('Lapiz roto robado'), findsOneWidget);
+    expect(find.text('Escultura David'), findsNothing);
+
+    // ----------------------------------------------------------------
+    // Mover el slider
+    await tester.drag(find.byKey(precio), const Offset(10, 0)); // (10€)
+    await tester.pumpAndSettle();
+
+    // Pulsar el botón de aplicar filtros
+    expect(find.text("Aplicar Filtros"), findsOneWidget); // Botón comprar
+    await tester.tap(find.text("Aplicar Filtros")); // Pulsamos el botón
+    await tester.pumpAndSettle();
+
+    // Se reduce la lista de productos
+    expect(find.text('Escultura de Dios'), findsNothing);
+    expect(find.text('Lapiz roto robado'), findsOneWidget);
+    expect(find.text('Escultura David'), findsNothing);
+  });
+
+  testWidgets('Prueba estado de productos', (WidgetTester tester) async {
+
+    // Build our app and trigger a frame.
+    tester.binding.window.physicalSizeTestValue = const Size(720, 1280);
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    await tester.pumpWidget(MyApp(vista, controlador));
+
+    // Comprobamos que los productos estén en la página principal
+    expect(find.text('Cuadro casero'), findsOneWidget);
+    expect(find.text('Lapiz roto robado'), findsOneWidget);
+    expect(find.text('Escultura David'), findsOneWidget);
+
+    // Filtramos por estado: roto
+    expect(find.text('Roto'), findsOneWidget);
+    await tester.tap(find.text('Roto')); // 
+    await tester.pumpAndSettle();
+
+    // Pulsar el botón de aplicar filtros
+    expect(find.text("Aplicar Filtros"), findsOneWidget); // Botón comprar
+    await tester.tap(find.text("Aplicar Filtros")); // Pulsamos el botón
+    await tester.pumpAndSettle();
+
+    //Encuentra sólo productos rotos
+    expect(find.text('Estado: Roto'), findsNWidgets(4));
+    expect(find.text('Estado: Bueno'), findsNothing);
+    expect(find.text('Estado: Excelente'), findsNothing);
+    expect(find.text('Estado: Nuevo'), findsNothing);
+
   });
 }
