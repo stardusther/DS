@@ -1,20 +1,19 @@
-import 'package:practica2/Vista.dart';
+// ignore_for_file: unnecessary_new - para que no sea quisquilloso con el formato, unnecessary_new
+
+import 'package:practica2/VistaModelo.dart';
 
 import 'Producto.dart';
 import 'TipoProducto.dart';
 import 'EstadoProducto.dart';
 import 'Cliente.dart';
 import 'Objetivo.dart';
-import 'CadenaFiltros.dart';
-import 'Filtro.dart';
 import 'GestorFiltros.dart';
 import 'FiltroPrecio.dart';
 import 'FiltroDistancia.dart';
 import 'FiltroEstadoProducto.dart';
 import 'FiltroTipoProducto.dart';
 import 'Controlador.dart';
-import 'WidgetMyHomePage.dart';
-import 'WidgetInicio.dart';
+import 'WidgetMyApp.dart';
 
 import 'package:flutter/material.dart';
 
@@ -27,8 +26,7 @@ void main() {
   gestorFiltros.setFiltro = new FiltroPrecio();
   gestorFiltros.setFiltro = new FiltroDistancia();
   gestorFiltros.setFiltro = new FiltroEstadoProducto();
-  gestorFiltros.setFiltro =
-      new FiltroTipoProducto(); // No sé por qué se pone un =, dart es un misterio
+  gestorFiltros.setFiltro = new FiltroTipoProducto();
 
   // Crear Cliente
   Cliente cliente = new Cliente();
@@ -48,11 +46,11 @@ void main() {
   Producto producto9 = new Producto(1, 1, "Lapiz roto robado", "Lapiz de mi colega de clase", TipoProducto.lapices, EstadoProducto.roto);
   Producto producto10 = new Producto(300, 3, "Pincel de acuarela", "Me vinieron dos pero solo quería uno, esta sin usar", TipoProducto.pincel, EstadoProducto.excelente);
   Producto producto11 = new Producto(200, 7, "Escultura de Hasbulla", "Escultura de Hasbulla 2", TipoProducto.escultura, EstadoProducto.bueno);
-  Producto producto12 = new Producto(350,5,"Cuadro Picassito","Cuadro de Picasso de su etapa en París",TipoProducto.lapices,EstadoProducto.excelente);
-  Producto producto13 = new Producto(20,15,"Pinturas acrílicas","Perfectas para tus cuadros", TipoProducto.pinturas, EstadoProducto.nuevo);
-  Producto producto14 = new Producto(1, 500, "Pintura industrial","Perfectas para tu empresa", TipoProducto.pinturas, EstadoProducto.nuevo);
-  Producto producto15 = new Producto(235,55.3,"Escultura de Dios","No se de donde saque esto",TipoProducto.escultura,EstadoProducto.excelente);
-  Producto producto16 = new Producto(5, 7,"Caballete (o eso creo)", "No sé que es, pero lo vendo", TipoProducto.caballete, EstadoProducto.roto);
+  Producto producto12 = new Producto(350, 5, "Cuadro Picassito", "Cuadro de Picasso de su etapa en París", TipoProducto.lapices, EstadoProducto.excelente);
+  Producto producto13 = new Producto(20, 15, "Pinturas acrílicas", "Perfectas para tus cuadros", TipoProducto.pinturas, EstadoProducto.nuevo);
+  Producto producto14 = new Producto(1, 500, "Pintura industrial", "Perfectas para tu empresa", TipoProducto.pinturas, EstadoProducto.nuevo);
+  Producto producto15 = new Producto(235, 55.3, "Escultura de Dios", "No se de donde saque esto", TipoProducto.escultura, EstadoProducto.excelente);
+  Producto producto16 = new Producto(5, 7, "Caballete (o eso creo)", "No sé que es, pero lo vendo", TipoProducto.caballete, EstadoProducto.roto);
 
   // Crear catalogo - coleccion de productos
   List<Producto> catalogo = [];
@@ -107,30 +105,5 @@ void main() {
 
   //////////////////////////////////////////////////////////////////////
   //Parte de flutter
-  //Añadir parte correspondiente a crear Pantalla en flutter
   runApp(MyApp(vista, controlador));
 }
-
-class MyApp extends StatelessWidget {
-  Vista? _vista = null; //Inicialmente a null
-  Controlador? _controlador = null;
-
-  MyApp(Vista vista, Controlador controlador, {Key? key})
-      : //Constructor - key se puede enviiar o no
-        _vista = vista,
-        _controlador = controlador,
-        super(key: key);
-
-  // Root de la aplicacion
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Compra-Venta de Arte',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
-      home: Inicio(),
-      //MyHomePage("Filtros de Productos Artísticos", _vista!, _controlador!), //! para no null
-    );
-  }
-} //Fin de la clase MyApp

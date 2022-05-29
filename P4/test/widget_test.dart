@@ -18,7 +18,7 @@ import 'package:practica2/GestorFiltros.dart';
 import 'package:practica2/Objetivo.dart';
 import 'package:practica2/Producto.dart';
 import 'package:practica2/TipoProducto.dart';
-import 'package:practica2/Vista.dart';
+import 'package:practica2/VistaModelo.dart';
 
 import 'package:practica2/main.dart';
 

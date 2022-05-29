@@ -1,20 +1,9 @@
-import 'package:practica2/Vista.dart';
-
-import 'Producto.dart';
-import 'TipoProducto.dart';
-import 'EstadoProducto.dart';
-import 'Cliente.dart';
-import 'Objetivo.dart';
-import 'CadenaFiltros.dart';
-import 'Filtro.dart';
-import 'GestorFiltros.dart';
-import 'FiltroPrecio.dart';
-import 'FiltroDistancia.dart';
-import 'FiltroEstadoProducto.dart';
-import 'FiltroTipoProducto.dart';
-import 'Controlador.dart';
-
 import 'package:flutter/material.dart';
+
+import 'WidgetInicio.dart';
+import 'WidgetPaginaPrincipal.dart';
+
+GlobalKey formkey = GlobalKey<FormState>();
 
 class Compra extends StatelessWidget {
   @override
@@ -24,15 +13,42 @@ class Compra extends StatelessWidget {
         title: Text("Compra"),
       ),
       body: Center(
-        child: Column(children: <Widget>[
-          Text("¡El producto se ha comprado con éxito!"),
-          RaisedButton(
-            onPressed: () {
-                home: MyHomePage("Filtros de Productos Artísticos", _vista!, _controlador!),
-            },
-            child: Text('Volver a página principal'),
-          ),
-        ]),
+        child: Column(
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.only(top: 2.5, bottom: 2.5, right: 10, left: 10),
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.orange,
+                  width: 1.5,
+                  ),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Text("¡El producto se ha comprado con éxito!"),
+                  RaisedButton(
+                    onPressed: () {
+                      //Inicio();
+                    },
+                    child: Text('Volver a página principal'),
+                  ),
+                  /*
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: <Widget>[
+                        // Add TextFormFields and ElevatedButton here.
+                      ],
+                    ),
+                  ),*/
+                ]
+              )
+            )
+          ] 
+        ),
       ),
     );
   }
