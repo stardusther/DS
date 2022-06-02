@@ -33,8 +33,12 @@ class Controlador {
     _acceso_api = new AccesoAPI();
   }
 
-  void modificarFiltro(
-      int index, List<int> lista) //Cambiar un filtro (para los botones)
+  void cambiarCatalogo(List<Producto> lista) {
+    _catalogo_inicial = lista;
+  }
+
+  void modificarFiltro(int index, List<int> lista) 
+  //Cambiar el valor de un filtro (para los botones)
   //0 - Precio | 1 - Distancia | 2 - Estado | 3 - Tipo
   {
     if (index <= 3) matriz_filtros[index] = lista;
@@ -46,27 +50,29 @@ class Controlador {
     if (filtros.length == 4) matriz_filtros = filtros;
   }
 
-  void aplicarFiltros(List<Producto> catalogo) //= Ejecutar
-  //Para ver resultado, ir a vista
+  void aplicarFiltros() //Ejecutar - Para ver resultado, ir a vista
   {
     //Si queremos hacer con todos los productos, aplicar metodo con get catalogo inicial
-    _cliente!.enviarPeticion(
-        catalogo, matriz_filtros); //! para no ejecutar si es null
+    _cliente!.enviarPeticion(_catalogo_inicial, matriz_filtros); 
   }
 
-  comprarProducto(int id_producto, Usuario usuario) {
+  bool comprarProducto(int id_producto, Usuario usuario) {
     return _acceso_api!.comprarProducto(id_producto, usuario);
   }
 
-  getProducto(int id_producto) {
+  Producto? getProducto(int id_producto) {
     return _acceso_api!.getProducto(id_producto);
   }
 
-  comprobarLogin(String username, String password) {
+  Usuario? comprobarLogin(String username, String password) {
     return _acceso_api!.comprobarLogin(username, password);
   }
 
-  registrarse(String username, String password, String direccion, String correo) {
+  bool registrarse(String username, String password, String correo, String direccion) {
     return _acceso_api!.registrarse(username, password, direccion, correo);
+  }
+
+  List<Producto> getProductos() {
+    return _acceso_api!.getProductos();
   }
 }

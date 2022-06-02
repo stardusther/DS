@@ -6,16 +6,25 @@ import 'main.dart'; //Para navegar en interfaz a compra
 import 'package:flutter/material.dart';
 
 
-class Vista
+class VistaModelo
 {
   Objetivo? _objetivo;
   List<Producto> _catalogo_final = []; 
 
-  Vista(Objetivo obj, List<Producto> catalogo_inicial)
+  VistaModelo(Objetivo obj, List<Producto> catalogo_inicial)
   {
     _objetivo = obj;
 
     _catalogo_final = catalogo_inicial;
+  }
+
+  VistaModelo.sinLista(Objetivo obj)
+  {
+    _objetivo = obj;
+  }
+
+  void cambiarCatalogo(List<Producto> lista) { //Por si inicialmente no tiene lista
+    _catalogo_final = lista;
   }
 
   void _actualizarProductos()

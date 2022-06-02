@@ -8,7 +8,6 @@ class GestorFiltros{
     // Variables
     CadenaFiltros? _cadena = null; //? es que se pueda hacer null
 
-    //Constructor TODO
     //Se quito el new en _cadena = CadenaFiltros(obj)
     GestorFiltros(Objetivo obj){
         _cadena = CadenaFiltros(obj);

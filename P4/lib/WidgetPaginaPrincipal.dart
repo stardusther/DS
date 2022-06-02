@@ -1,4 +1,5 @@
 import 'package:practica2/VistaModelo.dart';
+import 'package:practica2/WidgetMiUsuario.dart';
 
 import 'Controlador.dart';
 
@@ -10,24 +11,24 @@ import 'WidgetCompra.dart';
 //MyHomePage es el apartado de Filtros desarrollado en la P2
 class PaginaPrincipal extends StatefulWidget {
   String title;
-  Vista _vista;
+  VistaModelo _vistamodelo;
   Controlador _controlador;
   Usuario _usuario;
 
   PaginaPrincipal(
-      String title, Vista vista, Controlador controlador, Usuario usuario,
+      String title, VistaModelo vistamodelo, Controlador controlador, Usuario usuario,
       {Key? key})
       : this.title = title,
-        _vista = vista,
+        _vistamodelo = vistamodelo,
         _controlador = controlador,
         _usuario = usuario,
         super(key: key);
 
   @override
-  State<PaginaPrincipal> createState() => _MyHomePageState();
+  State<PaginaPrincipal> createState() => _EstadoPaginaPrincipal();
 }
 
-class _MyHomePageState extends State<PaginaPrincipal> {
+class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   double _valor_actual_precios = 0;
   double _valor_actual_distancia = 0;
   String? _valor_tipo = 'Ninguno';
@@ -60,9 +61,8 @@ class _MyHomePageState extends State<PaginaPrincipal> {
     if (_valor_actual_precios.round() == 0) //Si es 0, no aplicar filtro
       valor_filtro = -1;
 
-    widget._controlador.modificarFiltro(
-        0, [valor_filtro]); //Modificar el filtro de precio con el valor dado
-    //print("$_valor_actual_precios");
+    widget._controlador.modificarFiltro(0, [valor_filtro]); 
+    //Modificar el filtro de precio con el valor dado
   }
 
   void _selectorTipo() {
@@ -103,8 +103,7 @@ class _MyHomePageState extends State<PaginaPrincipal> {
       _sliderDistancia();
       _selectorTipo();
       _selectorEstados();
-      widget._controlador.aplicarFiltros(widget._controlador.catalogo_inicial);
-      print(widget._usuario.nombre+" "+widget._usuario.direccion+" "+widget._usuario.correo);
+      widget._controlador.aplicarFiltros();
     });
   }
 
@@ -125,22 +124,47 @@ class _MyHomePageState extends State<PaginaPrincipal> {
             //Coge lista de hijos y los coloca verticalmente
             children: <Widget>[
               Container( //Hola Usuario y Boton de cerrar sesion
-                alignment: AlignmentDirectional.topEnd, // <-- SEE HERE
-                margin: const EdgeInsets.only(top: 5, bottom: 2, right: 5, left: 125),
+                //margin: const EdgeInsets.only(top: 5, bottom: 2, right: 5, left: 125),
                 child: Row(
-                  children: [
-                      const Text("Bienvenido "),
-                      if(widget._usuario.nombre.length < 20)
-                        Text(widget._usuario.nombre+"     ", style: TextStyle(fontWeight: FontWeight.bold)), //espacio para ponerlo en el centro
-                      RaisedButton(
+                  mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
+                  children: [ //botones de mi usuario y cerrar sesion
+                    Container(
+                      margin: const EdgeInsets.all(7.5),
+                      child: RaisedButton(
+                        child: const Text("Mi usuario"),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => 
+                              MiUsuario(widget._usuario)),
+                          );                        
+                        },
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(7.5),
+                      child: RaisedButton(
                         child: const Text("Cerrar Sesion"),
                         onPressed: () {
                           Navigator.pop(context); //Regresar a pantalla principal
                         },                  
+                      ),
                     ),
                   ],
                 ),
               ),
+
+              Container(
+                padding: const EdgeInsets.all(2.5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
+                    children: [
+                      const Text ("Bienvenido ", style: const TextStyle(fontSize: 16)),
+                      Text(widget._usuario.nombre+"     ", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)), //espacio para ponerlo en el centro
+                    ],
+                ),
+              ),
+
               Container(
                 //Metemos botones, y le ponemos borde a la zona de botones
                 margin: const EdgeInsets.only(top: 5, bottom: 2, right: 10, left: 10),
@@ -156,7 +180,7 @@ class _MyHomePageState extends State<PaginaPrincipal> {
 
                 child: Column(//Botones y textos
                   children: <Widget>[
-                  Text("Filtro Precio: "),
+                  const Text("Filtro Precio: "),
                   Slider(
                     //Paquete flutter_xlider y funcion para divisiones customs
                     key: const Key('sliderPrecio'),
@@ -169,7 +193,7 @@ class _MyHomePageState extends State<PaginaPrincipal> {
                       setState(() => _valor_actual_precios = nuevoRating);
                     },
                   ),
-                  Text("Filtro Distancia: "),
+                  const Text("Filtro Distancia: "),
                   Slider(
                     //Paquete flutter_xlider y funcion para divisiones customs
                     key: const Key('sliderDistancia'),
@@ -182,7 +206,7 @@ class _MyHomePageState extends State<PaginaPrincipal> {
                       setState(() => _valor_actual_distancia = nuevoRating);
                     },
                   ),
-                  Text("Filtro Tipo:"),
+                  const Text("Filtro Tipo:"),
                   DropdownButton<String>(
                     value: _valor_tipo,
                     items: _tipos_producto.map(buildMenuItem).toList(),
@@ -190,7 +214,7 @@ class _MyHomePageState extends State<PaginaPrincipal> {
                       setState(() => _valor_tipo = valor);
                     },
                   ),
-                  Text("Filtro Estado:"),
+                  const Text("Filtro Estado:"),
                   ToggleButtons(
                     children: const <Widget>[
                       Text('Nuevo'),
@@ -204,8 +228,7 @@ class _MyHomePageState extends State<PaginaPrincipal> {
                     isSelected: _estados_seleccionados,
                     onPressed: (int index) {
                       setState(() {
-                        _estados_seleccionados[index] =
-                            !_estados_seleccionados[index];
+                        _estados_seleccionados[index] = !_estados_seleccionados[index];
                       });
                     },
                   ),
@@ -225,38 +248,41 @@ class _MyHomePageState extends State<PaginaPrincipal> {
                   ),
                 ]),
               ),
-              for (int i = 0;
-                  i < widget._vista.getProductosFiltrados().length;
-                  i++)
-                Container(
-                  margin: const EdgeInsets.only(
-                      top: 2.5, bottom: 2.5, right: 10, left: 10),
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      color: Color.fromARGB(255, 198, 177, 223),
-                      width: 1.5,
+
+              if(widget._vistamodelo.getProductosFiltrados().isNotEmpty)              
+                for (int i = 0; i < widget._vistamodelo.getProductosFiltrados().length; i++)
+                  Container(
+                    margin: const EdgeInsets.only(top: 2.5, bottom: 2.5, right: 10, left: 10),
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Color.fromARGB(255, 198, 177, 223),
+                        width: 1.5,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    borderRadius: BorderRadius.circular(5),
+                    child: Column(
+                      children: <Widget>[
+                        widget._vistamodelo.getProductosFiltradosWidget()[i],
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Compra()),
+                            );
+                          },
+                          child: Text("Comprar " + widget._vistamodelo.getCatalogo()[i].nombre),
+                          color: const Color.fromARGB(255, 248, 231, 80),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(1000)),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Column(children: <Widget>[
-                    widget._vista.getProductosFiltradosWidget()[i],
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Compra()),
-                        );
-                      },
-                      child: Text(
-                          "Comprar " + widget._vista.getCatalogo()[i].nombre),
-                      color: Color.fromARGB(255, 248, 231, 80),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(1000)),
-                    ),
-                  ]),
-                ),
+              
+              if(widget._vistamodelo.getProductosFiltrados().isEmpty)              
+                const Text("ERROR - No hay productos que cumplan esos criterios"),
             ],
           ),
         ),
@@ -264,8 +290,8 @@ class _MyHomePageState extends State<PaginaPrincipal> {
     );
   }
 
-  DropdownMenuItem<String> buildMenuItem(
-          String item) => //Crear para cada item, para seleccionar
+  //Crear para cada item. Para seleccionar
+  DropdownMenuItem<String> buildMenuItem(String item) => 
       DropdownMenuItem(
         value: item,
         child: Text(

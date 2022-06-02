@@ -8,12 +8,12 @@ import 'WidgetPaginaPrincipal.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
-  Vista? _vista = null; //Inicialmente a null
+  VistaModelo? _vistamodelo = null; //Inicialmente a null
   Controlador? _controlador = null;
 
-  MyApp(Vista vista, Controlador controlador, {Key? key})
+  MyApp(VistaModelo vistamodelo, Controlador controlador, {Key? key})
     : //Constructor - key se puede enviiar o no
-      _vista = vista,
+      _vistamodelo = vistamodelo,
       _controlador = controlador,
       super(key: key);
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: Inicio(_vista!, _controlador!),
+      home: Inicio(_vistamodelo!, _controlador!),
       //home: MyHomePage("Filtros de Productos Artísticos", _vista!, _controlador!), //! para no null
     );
   }

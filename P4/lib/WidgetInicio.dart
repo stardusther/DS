@@ -8,20 +8,26 @@ import 'WidgetPaginaPrincipal.dart';
 import 'WidgetRegistro.dart';
 
 final formKey = GlobalKey<FormState>();
-final errorKey = GlobalKey();
 
 //Pantalla inicial de la aplicacion
-class Inicio extends StatelessWidget {
-  String _nombre_usuario = "";
-  String _contrasenia = "";
-  Vista _vista;
-  Usuario? _usuario = null;
+class Inicio extends StatefulWidget {
+  VistaModelo _vistamodelo;
   Controlador _controlador;
 
-  Inicio(Vista vista, Controlador controlador, {Key? key})
-      : _vista = vista,
+  Inicio(VistaModelo vistamodelo, Controlador controlador, {Key? key})
+      : _vistamodelo = vistamodelo,
         _controlador = controlador,
         super(key: key);
+
+  @override
+  State<Inicio> createState() => _EstadoInicio();
+}
+
+class _EstadoInicio extends State<Inicio> {
+  String _nombre_usuario = "";
+  String _contrasenia = "";
+  Usuario? _usuario = null;
+  bool error_login = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +41,7 @@ class Inicio extends StatelessWidget {
             Container(
               //Container con el que iniciamos sesion
               margin: const EdgeInsets.only(
-                  top: 150, bottom: 200, right: 10, left: 10),
+                  top: 100, bottom: 100, right: 10, left: 10),
               padding:
                   const EdgeInsets.only(top: 15, bottom: 15, right: 5, left: 5),
               decoration: BoxDecoration(
@@ -96,60 +102,84 @@ class Inicio extends StatelessWidget {
                               },
                             ),
                           ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 5, bottom: 7.5, right: 10, left: 10),                          
-                          child: 
-                            Text(
-                              "ERROR - el usuario o la contraseña no son correctos", 
+
+                          if (error_login) //Si hay error lo muestra
+                          Container(
+                            margin: const EdgeInsets.only(
+                                top: 5, bottom: 7.5, right: 10, left: 10),
+                            child: const Text(
+                              "ERROR - el usuario o la contraseña no son correctos",
                               style: TextStyle(color: Colors.red),
-                              key : errorKey,
-                              
                             ),
-                        )
+                          ),
                         ],
-                      )),
+                      )
+                    ),
                   RaisedButton(
                     //Boton para enviar el formulario
-                    onPressed: () {
+                    onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         //Si estan rellenos los campos
-                        formKey.currentState!.save(); //Guardar lo que esta escrito
+                        formKey.currentState!.save(); //Guardar lo escrito
 
-                        _usuario = _controlador.comprobarLogin(_nombre_usuario, _contrasenia);
-                        if (_usuario != null) { //Si el usuario existe
-                          Navigator.push(context,
+                        _usuario = widget._controlador.comprobarLogin(_nombre_usuario, _contrasenia);
+                        if (_usuario != null) {//Si el usuario existe
+
+                          if (error_login) { //Si habia error quitarlo
+                            setState(() {
+                              error_login = false;
+                            });
+                          }
+
+                          await Future.delayed(const Duration(seconds: 1)); //Pausa para simular lo que tarda en cargar
+
+                          //Cuando se va a abrir la pagina principal, pasamos el catalogo
+                          widget._controlador.cambiarCatalogo(widget._controlador.getProductos());
+                          
+                          //Enviamos el catalogo inicial, para que inicialmente
+                          // aparezca el catalogo completo
+                          widget._vistamodelo.cambiarCatalogo(widget._controlador.getProductos());
+
+                          Navigator.push(
+                            context,
                             MaterialPageRoute(
                                 builder: (context) => PaginaPrincipal(
-                                    "Filtros de Productos Artísticos",
-                                    _vista,
-                                    _controlador, _usuario!)),
+                                  "Filtros de Productos Artísticos",
+                                  widget._vistamodelo,
+                                  widget._controlador,
+                                  _usuario!)),
                           );
+                        } else {
+                          //Si no existe el usuario, muestre mensaje de error
+                          setState(() {
+                            error_login = true;
+                          });
                         }
-
-                        /*
-                        else { //Si no existe el usuario, muestre mensaje de error
-                          const Text("Error, el usuario o la contraseña no son correctos");
-                        } ERROR TODO*/
                       }
                     },
                     child: const Text('Iniciar sesión'),
                   ),
-
                   Container(
-                    padding: const EdgeInsets.all(5),
-                    margin: const EdgeInsets.all(7.5),
+                    padding: const EdgeInsets.all(4),
+                    margin: const EdgeInsets.all(5),
                     child: Column(
                       children: [
                         const Text("¿No tienes cuenta? ¡Registrate!"),
-                        RaisedButton(
-                          child:  const Text("Registrarse"),
-                          onPressed: (){
-                            Navigator.push(context,MaterialPageRoute(
-                                builder: (context) => Registro()
-                              ),
-                            );
-                          },
-                        ),
+                        Container(
+                          margin: const EdgeInsets.all(5),
+                          child: 
+                            RaisedButton( //Boton para registrarse
+                            child: const Text("Registrarse"),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => 
+                                      Registro(widget._controlador)),
+                              );
+                            },
+                          ),
+                        ),                        
                       ],
                     ),
                   ),
