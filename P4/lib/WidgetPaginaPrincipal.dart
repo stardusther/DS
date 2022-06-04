@@ -284,7 +284,8 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => WidgetProducto(
-                                      widget._vistamodelo.getCatalogo()[i])),
+                                      widget._vistamodelo.getCatalogo()[i], 
+                                      widget._controlador, widget._usuario)),
                             );
                           },
                           child: Text("Ver más de " +

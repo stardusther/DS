@@ -6,14 +6,13 @@ import 'TipoProducto.dart';
 import 'Usuario.dart';
 
 class AccesoAPI {
-  bool comprarProducto(int id_producto, Usuario usuario) {
+  bool comprarProducto(int id_producto, Usuario usuario) { //No hace nada pero contemplado para cuando llegase su momento
     //return _acceso_api.comprarProducto(id_producto, usuario);
     //print(usuario.nombre + " " + usuario.correo + " " + usuario.direccion);
     return true;
   }
 
-  Producto? getProducto(int id_producto) {
-    //return _acceso_api.getProducto(id_producto);
+  Producto? getProducto(int id_producto) { //No usado
     return null;
   }
 
@@ -27,6 +26,7 @@ class AccesoAPI {
   }
 
   bool registrarse(String username, String password, String direccion, String correo) {
+    //OJO no permitir que tenga username repetido
     return true;
     //return _acceso_api.registrarse(username, password, direccion, correo);
   }

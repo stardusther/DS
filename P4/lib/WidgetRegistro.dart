@@ -172,7 +172,7 @@ class _EstadoRegistro extends State<Registro> {
                                 (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_correo))
                                 ) 
                               {
-                                if (error_registro) {
+                                if (error_registro) { //desactivr si habia error
                                   error_registro = false;
                                 }
 
@@ -187,7 +187,7 @@ class _EstadoRegistro extends State<Registro> {
 
                                 Navigator.pop(context); //Regresar
                               } 
-                              else {
+                              else { //si ha habido error en registro
                                 setState(() {
                                   error_registro = true;
                                 });

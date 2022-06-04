@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 
+import 'Controlador.dart';
 import 'Producto.dart';
+import 'Usuario.dart';
 
 class WidgetCompra extends StatelessWidget {
-  Producto _producto;
+  late Producto _producto;
+  late Controlador _controlador;
+  late Usuario _usuario;
 
-  WidgetCompra(Producto prod, {Key? key})
-  : _producto = prod,
-    super(key: key);
+  WidgetCompra(Producto prod, Controlador cont, Usuario usuario, {Key? key})
+      : super(key: key) {
+    _producto = prod;
+    _controlador = cont;
+    _controlador.comprarProducto(prod.id_producto, usuario); //simular que compramos el producto aunque realmente no hagamos nada
+    _usuario = usuario;
+    (key = key);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,21 +44,26 @@ class WidgetCompra extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(5),
                     margin: const EdgeInsets.all(5),
-                    child : Row(
-                      mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .center, //Center Row contents horizontally,
                       children: [
                         const Text("¡El producto \""),
-                        Text(_producto.nombre, style: const TextStyle(fontWeight: FontWeight.bold)),
+                        Text(_producto.nombre,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
                         const Text("\" se ha comprado con éxito!"),
                       ],
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.only(top:0, bottom:5, right:10, left:10),
+                    padding: const EdgeInsets.only(
+                        top: 0, bottom: 5, right: 10, left: 10),
                     margin: const EdgeInsets.all(5),
-                    child:  const Text("Gracias por confiar en Wallapart"),
+                    child: Text("Gracias " +
+                        _usuario.nombre +
+                        " por confiar en Wallapart"),
                   ),
-
                   RaisedButton(
                     onPressed: () {
                       Navigator.pop(context);

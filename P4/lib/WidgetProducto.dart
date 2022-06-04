@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:practica2/Usuario.dart';
 import 'package:practica2/VistaModelo.dart';
 
 import 'Producto.dart';
 import 'WidgetCompra.dart';
 import 'VistaModelo.dart';
+import 'Controlador.dart';
 
 class WidgetProducto extends StatelessWidget {
   Producto _producto;
+  Controlador _controlador;
+  Usuario _usuario;
 
-  WidgetProducto(Producto prod, {Key? key})
+  WidgetProducto(Producto prod, Controlador cont, Usuario usuario, {Key? key})
       : _producto = prod,
+        _controlador = cont,
+        _usuario = usuario,
         super(key: key);
 
   @override
@@ -109,8 +115,10 @@ class WidgetProducto extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment
                           .center, //Center Row contents horizontally,
                       children: [
-                        const Text("Estado: ",style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(VistaModelo.formateaEstadoProducto(_producto.estado.toString())), 
+                        const Text("Estado: ",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(VistaModelo.formateaEstadoProducto(
+                            _producto.estado.toString())),
                       ],
                     ),
                   ),
@@ -124,8 +132,10 @@ class WidgetProducto extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment
                           .center, //Center Row contents horizontally,
                       children: [
-                        const Text("Tipo: ",style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(VistaModelo.formateaTipoProducto(_producto.tipo.toString())), 
+                        const Text("Tipo: ",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(VistaModelo.formateaTipoProducto(
+                            _producto.tipo.toString())),
                       ],
                     ),
                   ),
@@ -135,7 +145,7 @@ class WidgetProducto extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => WidgetCompra(_producto)),
+                            builder: (context) => WidgetCompra(_producto, _controlador, _usuario)),
                       );
                     },
                     child: const Text("Comprar producto"),
