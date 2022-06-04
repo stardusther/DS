@@ -2,8 +2,6 @@ import 'package:practica2/VistaModelo.dart';
 import 'package:practica2/WidgetInicio.dart';
 
 import 'Controlador.dart';
-import 'WidgetCompra.dart';
-import 'WidgetPaginaPrincipal.dart';
 
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,7 @@
-2022/06/01-17:52:14.653 3218 Reusing MANIFEST C:\Users\Zuki\AppData\Local\Temp\flutter_tools.7111ac1\flutter_tools_chrome_device.c748256a\Default\IndexedDB\https_ntp.msn.com_0.indexeddb.leveldb/MANIFEST-000001
-2022/06/01-17:52:14.653 3218 Recovering log #4
-2022/06/01-17:52:14.663 3218 Reusing old log C:\Users\Zuki\AppData\Local\Temp\flutter_tools.7111ac1\flutter_tools_chrome_device.c748256a\Default\IndexedDB\https_ntp.msn.com_0.indexeddb.leveldb/000004.log 
-2022/06/01-17:52:14.664 3218 Delete type=0 #3
+2022/06/04-19:24:47.803 268 Reusing MANIFEST C:\Users\Zuki\AppData\Local\Temp\flutter_tools.19890334\flutter_tools_chrome_device.fc9fbdbc\Default\IndexedDB\https_ntp.msn.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/06/04-19:24:47.804 268 Recovering log #4
+2022/06/04-19:24:47.827 268 Reusing old log C:\Users\Zuki\AppData\Local\Temp\flutter_tools.19890334\flutter_tools_chrome_device.fc9fbdbc\Default\IndexedDB\https_ntp.msn.com_0.indexeddb.leveldb/000004.log 
+2022/06/04-19:24:47.828 268 Delete type=0 #3
+2022/06/04-19:24:50.061 4028 Level-0 table #8: started
+2022/06/04-19:24:50.124 4028 Level-0 table #8: 1453598 bytes OK
+2022/06/04-19:24:50.128 4028 Delete type=0 #4

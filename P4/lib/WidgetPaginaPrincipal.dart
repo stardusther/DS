@@ -1,12 +1,12 @@
 import 'package:practica2/VistaModelo.dart';
 import 'package:practica2/WidgetMiUsuario.dart';
+import 'package:practica2/WidgetProducto.dart';
 
 import 'Controlador.dart';
 
 import 'package:flutter/material.dart';
 
 import 'Usuario.dart';
-import 'WidgetCompra.dart';
 
 //MyHomePage es el apartado de Filtros desarrollado en la P2
 class PaginaPrincipal extends StatefulWidget {
@@ -15,8 +15,8 @@ class PaginaPrincipal extends StatefulWidget {
   Controlador _controlador;
   Usuario _usuario;
 
-  PaginaPrincipal(
-      String title, VistaModelo vistamodelo, Controlador controlador, Usuario usuario,
+  PaginaPrincipal(String title, VistaModelo vistamodelo,
+      Controlador controlador, Usuario usuario,
       {Key? key})
       : this.title = title,
         _vistamodelo = vistamodelo,
@@ -61,7 +61,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
     if (_valor_actual_precios.round() == 0) //Si es 0, no aplicar filtro
       valor_filtro = -1;
 
-    widget._controlador.modificarFiltro(0, [valor_filtro]); 
+    widget._controlador.modificarFiltro(0, [valor_filtro]);
     //Modificar el filtro de precio con el valor dado
   }
 
@@ -99,6 +99,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
 
   void _aplicarFiltros() {
     setState(() {
+      widget._vistamodelo.finPrimeraVez();
       _sliderPrecio();
       _sliderDistancia();
       _selectorTipo();
@@ -123,11 +124,14 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
           child: Column(
             //Coge lista de hijos y los coloca verticalmente
             children: <Widget>[
-              Container( //Hola Usuario y Boton de cerrar sesion
+              Container(
+                //Hola Usuario y Boton de cerrar sesion
                 //margin: const EdgeInsets.only(top: 5, bottom: 2, right: 5, left: 125),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
-                  children: [ //botones de mi usuario y cerrar sesion
+                  mainAxisAlignment: MainAxisAlignment
+                      .center, //Center Row contents horizontally,
+                  children: [
+                    //botones de mi usuario y cerrar sesion
                     Container(
                       margin: const EdgeInsets.all(7.5),
                       child: RaisedButton(
@@ -135,9 +139,10 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => 
-                              MiUsuario(widget._usuario)),
-                          );                        
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    MiUsuario(widget._usuario)),
+                          );
                         },
                       ),
                     ),
@@ -146,28 +151,33 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                       child: RaisedButton(
                         child: const Text("Cerrar Sesion"),
                         onPressed: () {
-                          Navigator.pop(context); //Regresar a pantalla principal
-                        },                  
+                          Navigator.pop(
+                              context); //Regresar a pantalla principal
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
-
               Container(
                 padding: const EdgeInsets.all(2.5),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
-                    children: [
-                      const Text ("Bienvenido ", style: const TextStyle(fontSize: 16)),
-                      Text(widget._usuario.nombre+"     ", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)), //espacio para ponerlo en el centro
-                    ],
+                  mainAxisAlignment: MainAxisAlignment
+                      .center, //Center Row contents horizontally,
+                  children: [
+                    const Text("Bienvenido ",
+                        style: const TextStyle(fontSize: 16)),
+                    Text(widget._usuario.nombre + "     ",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16)), //espacio para ponerlo en el centro
+                  ],
                 ),
               ),
-
               Container(
                 //Metemos botones, y le ponemos borde a la zona de botones
-                margin: const EdgeInsets.only(top: 5, bottom: 2, right: 10, left: 10),
+                margin: const EdgeInsets.only(
+                    top: 5, bottom: 2, right: 10, left: 10),
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: Color.fromARGB(0, 200, 186, 220), //color naranjita
@@ -179,7 +189,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                 ),
 
                 child: Column(//Botones y textos
-                  children: <Widget>[
+                    children: <Widget>[
                   const Text("Filtro Precio: "),
                   Slider(
                     //Paquete flutter_xlider y funcion para divisiones customs
@@ -228,7 +238,8 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                     isSelected: _estados_seleccionados,
                     onPressed: (int index) {
                       setState(() {
-                        _estados_seleccionados[index] = !_estados_seleccionados[index];
+                        _estados_seleccionados[index] =
+                            !_estados_seleccionados[index];
                       });
                     },
                   ),
@@ -248,16 +259,18 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                   ),
                 ]),
               ),
-
-              if(widget._vistamodelo.getProductosFiltrados().isNotEmpty)              
-                for (int i = 0; i < widget._vistamodelo.getProductosFiltrados().length; i++)
+              if (widget._vistamodelo.getProductosFiltrados().isNotEmpty)
+                for (int i = 0;
+                    i < widget._vistamodelo.getCatalogo().length;
+                    i++)
                   Container(
-                    margin: const EdgeInsets.only(top: 2.5, bottom: 2.5, right: 10, left: 10),
+                    margin: const EdgeInsets.only(
+                        top: 2.5, bottom: 2.5, right: 10, left: 10),
                     padding: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(
-                        color: Color.fromARGB(255, 198, 177, 223),
+                        color: Color.fromARGB(255, 108, 108, 108),
                         width: 1.5,
                       ),
                       borderRadius: BorderRadius.circular(5),
@@ -269,10 +282,13 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Compra()),
+                              MaterialPageRoute(
+                                  builder: (context) => WidgetProducto(
+                                      widget._vistamodelo.getCatalogo()[i])),
                             );
                           },
-                          child: Text("Comprar " + widget._vistamodelo.getCatalogo()[i].nombre),
+                          child: Text("Ver más de " +
+                              widget._vistamodelo.getCatalogo()[i].nombre),
                           color: const Color.fromARGB(255, 248, 231, 80),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(1000)),
@@ -280,9 +296,12 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
                       ],
                     ),
                   ),
-              
-              if(widget._vistamodelo.getProductosFiltrados().isEmpty)              
-                const Text("ERROR - No hay productos que cumplan esos criterios"),
+              if (widget._vistamodelo.getProductosFiltrados().isEmpty)
+                Container(
+                  margin: const EdgeInsets.all(10.0),
+                  child: const Text(
+                      "ERROR - No hay productos que cumplan esos criterios :("),
+                ),
             ],
           ),
         ),
@@ -291,8 +310,7 @@ class _EstadoPaginaPrincipal extends State<PaginaPrincipal> {
   }
 
   //Crear para cada item. Para seleccionar
-  DropdownMenuItem<String> buildMenuItem(String item) => 
-      DropdownMenuItem(
+  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
         value: item,
         child: Text(
           item,
