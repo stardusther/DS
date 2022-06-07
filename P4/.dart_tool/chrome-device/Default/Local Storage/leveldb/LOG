@@ -1,4 +1,4 @@
-2022/06/07-00:38:16.636 216c Reusing MANIFEST C:\Users\Zuki\AppData\Local\Temp\flutter_tools.43be587c\flutter_tools_chrome_device.201e0b8a\Default\Local Storage\leveldb/MANIFEST-000001
-2022/06/07-00:38:16.638 216c Recovering log #4
-2022/06/07-00:38:16.639 216c Reusing old log C:\Users\Zuki\AppData\Local\Temp\flutter_tools.43be587c\flutter_tools_chrome_device.201e0b8a\Default\Local Storage\leveldb/000004.log 
-2022/06/07-00:38:16.639 216c Delete type=0 #3
+2022/06/08-00:05:38.687 5303 Reusing MANIFEST /private/var/folders/tf/nxtg7h992jd779m59_r21l180000gn/T/flutter_tools.EUXEYy/flutter_tools_chrome_device.kLtOv4/Default/Local Storage/leveldb/MANIFEST-000001
+2022/06/08-00:05:38.688 5303 Recovering log #4
+2022/06/08-00:05:38.688 5303 Reusing old log /private/var/folders/tf/nxtg7h992jd779m59_r21l180000gn/T/flutter_tools.EUXEYy/flutter_tools_chrome_device.kLtOv4/Default/Local Storage/leveldb/000004.log 
+2022/06/08-00:05:38.688 5303 Delete type=0 #3

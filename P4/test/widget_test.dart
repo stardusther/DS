@@ -19,8 +19,12 @@ import 'package:practica2/Objetivo.dart';
 import 'package:practica2/Producto.dart';
 import 'package:practica2/TipoProducto.dart';
 import 'package:practica2/VistaModelo.dart';
+import 'package:practica2/WidgetMyApp.dart';
 
 import 'package:practica2/main.dart';
+
+// Para los test de integración
+//import 'package:integration_test/integration_test.dart';
 
 void main() {
   Objetivo objetivo = new Objetivo();
@@ -35,22 +39,22 @@ void main() {
 
   cliente.setGestorFiltros = gestorFiltros;
 
-  Producto producto1 = new Producto(10, 10, "Cuadro Mona Lisa", "Un cuadro sin más de mi abuela", TipoProducto.cuadro, EstadoProducto.nuevo);
-  Producto producto2 = new Producto(200, 2, "Lapiz 2B", "Un lápiz bonito", TipoProducto.lapices, EstadoProducto.bueno);
-  Producto producto3 = new Producto(500, 300, "Escultura David", "Escultura bien fachera", TipoProducto.escultura, EstadoProducto.bueno);
-  Producto producto4 = new Producto(100, 55, "Caballete marrón", "Caballete casi sin usar", TipoProducto.caballete, EstadoProducto.excelente);
-  Producto producto5 = new Producto(3, 80, "Cuadro casero", "Le he dedicado muchas horas merece la pena", TipoProducto.cuadro, EstadoProducto.nuevo);
-  Producto producto6 = new Producto(12, 3,  "Pincelito", "Pincelito para pintar", TipoProducto.pincel, EstadoProducto.bueno);
-  Producto producto7 = new Producto(16.55, 1, "Acuarela", "Acuarela dije", TipoProducto.pinturas, EstadoProducto.roto);
-  Producto producto8 = new Producto(5, 2, "Lienzo", "Aqui dibujaba Piccaso", TipoProducto.lienzo, EstadoProducto.roto);
-  Producto producto9 = new Producto(1, 1, "Lapiz roto robado", "Lapiz de mi colega de clase", TipoProducto.lapices, EstadoProducto.roto);
-  Producto producto10 = new Producto(300, 3, "Pincel de acuarela", "Me vinieron dos pero solo quería uno, esta sin usar", TipoProducto.pincel, EstadoProducto.excelente);
-  Producto producto11 = new Producto(200, 7, "Escultura de Hasbulla", "Escultura de Hasbulla 2", TipoProducto.escultura, EstadoProducto.bueno);
-  Producto producto12 = new Producto(350, 5, "Cuadro Picassito", "Cuadro de Picasso de su etapa en París", TipoProducto.lapices, EstadoProducto.excelente);
-  Producto producto13 = new Producto(20, 15, "Pinturas acrílicas", "Perfectas para tus cuadros", TipoProducto.pinturas, EstadoProducto.nuevo);
-  Producto producto14 = new Producto(1, 500, "Pintura industrial", "Perfectas para tu empresa", TipoProducto.pinturas, EstadoProducto.nuevo); 
-  Producto producto15 = new Producto(235, 55.3, "Escultura de Dios", "No se de donde saque esto", TipoProducto.escultura, EstadoProducto.excelente);
-  Producto producto16 = new Producto(5, 7, "Caballete (o eso creo)", "No sé que es, pero lo vendo", TipoProducto.caballete, EstadoProducto.roto);
+Producto producto1 = new Producto(10, 10, "Cuadro Mona Lisa", "Un cuadro sin más de mi abuela", TipoProducto.cuadro, EstadoProducto.nuevo, 0);
+  Producto producto2 = new Producto(200, 2, "Lapiz 2B", "Un lápiz bonito", TipoProducto.lapices, EstadoProducto.bueno, 1);
+  Producto producto3 = new Producto(500, 300, "Escultura David", "Escultura bien fachera", TipoProducto.escultura, EstadoProducto.bueno, 2);
+  Producto producto4 = new Producto(100, 55, "Caballete marrón", "Caballete casi sin usar", TipoProducto.caballete, EstadoProducto.excelente, 3);
+  Producto producto5 = new Producto(3, 80, "Cuadro casero", "Le he dedicado muchas horas merece la pena", TipoProducto.cuadro, EstadoProducto.nuevo, 4);
+  Producto producto6 = new Producto(12, 3,  "Pincelito", "Pincelito para pintar", TipoProducto.pincel, EstadoProducto.bueno, 5);
+  Producto producto7 = new Producto(16.55, 1, "Acuarela", "Acuarela dije", TipoProducto.pinturas, EstadoProducto.roto, 6);
+  Producto producto8 = new Producto(5, 2, "Lienzo", "Aqui dibujaba Piccaso", TipoProducto.lienzo, EstadoProducto.roto, 7);
+  Producto producto9 = new Producto(1, 1, "Lapiz roto robado", "Lapiz de mi colega de clase", TipoProducto.lapices, EstadoProducto.roto, 8);
+  Producto producto10 = new Producto(300, 3, "Pincel de acuarela", "Me vinieron dos pero solo quería uno, esta sin usar", TipoProducto.pincel, EstadoProducto.excelente, 9);
+  Producto producto11 = new Producto(200, 7, "Escultura de Hasbulla", "Escultura de Hasbulla 2", TipoProducto.escultura, EstadoProducto.bueno, 10);
+  Producto producto12 = new Producto(350, 5, "Cuadro Picassito", "Cuadro de Picasso de su etapa en París", TipoProducto.lapices, EstadoProducto.excelente, 11);
+  Producto producto13 = new Producto(20, 15, "Pinturas acrílicas", "Perfectas para tus cuadros", TipoProducto.pinturas, EstadoProducto.nuevo, 12);
+  Producto producto14 = new Producto(1, 500, "Pintura industrial", "Perfectas para tu empresa", TipoProducto.pinturas, EstadoProducto.nuevo, 13); 
+  Producto producto15 = new Producto(235, 55.3, "Escultura de Dios", "No se de donde saque esto", TipoProducto.escultura, EstadoProducto.excelente, 14);
+  Producto producto16 = new Producto(5, 7, "Caballete (o eso creo)", "No sé que es, pero lo vendo", TipoProducto.caballete, EstadoProducto.roto, 15);
 
   List<Producto> catalogo = [];
 
@@ -72,46 +76,56 @@ void main() {
   catalogo.add(producto16);
 
   Controlador controlador = new Controlador(cliente, catalogo);
-  Vista vista = new Vista(objetivo, catalogo);
+  VistaModelo vista = new VistaModelo(objetivo, catalogo);
 
   List<int> listaFiltro1 = [];
   List<int> listaFiltro2 = [];
   List<int> listaFiltro3 = [];
   List<int> listaFiltro4 = [];
 
-  controlador.aplicarFiltros(catalogo);
+  controlador.cambiarCatalogo(catalogo);
+  controlador.aplicarFiltros();
 
   List<Producto> catFinal = vista.getProductosFiltrados();
+
+  //IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
 /**
  * @brief Test que comprueba la navegabilidad entre la página principal y la de compra de un producto
  */
   testWidgets('Prueba compra de productos', (WidgetTester tester) async {
 
+    const usr = Key('username');
+    const pwd = Key('password');
+
     // Build our app and trigger a frame.
     tester.binding.window.physicalSizeTestValue = const Size(720, 1280);
     tester.binding.window.devicePixelRatioTestValue = 1.0;
     await tester.pumpWidget(MyApp(vista, controlador));
 
+    //Iniciar sesion como admin
+    expect(find.byKey(usr), findsOneWidget); // Debe encontrar uno
+    await tester.enterText(find.byKey(usr), 'AlexCollado'); // Introducimos el usuario
+    
+    expect(find.byKey(pwd), findsOneWidget); // Debe encontrar uno
+    await tester.enterText(find.byKey(pwd), '12345'); // Introducimos la contraseña
+
+    expect(find.text("Iniciar sesión"), findsOneWidget);
+    await tester.tap(find.text("Iniciar sesión")); // Pulsamos el botón
+    await tester.pumpAndSettle();
+
     // Verificar que se han cargado bien todos los elementos.
-    expect(find.text('Cuadro Mona Lisa'), findsOneWidget); // Debe encontrar uno
+    //expect(find.text('Cuadro Mona Lisa'), findsOneWidget); // Debe encontrar uno
     expect(find.text('Pintura del Louvre'), findsNothing); // No debe encontrar nada
 
-    expect(find.text("Comprar Cuadro Mona Lisa"), findsOneWidget); // Botón comprar
-    await tester.tap(find.text("Comprar Cuadro Mona Lisa")); // Pulsamos el botón
+    expect(find.text("Ver más de Cuadro Mona Lisa"), findsOneWidget); // Botón comprar
+    await tester.tap(find.text("Ver más de Cuadro Mona Lisa")); // Pulsamos el botón
     await tester.pumpAndSettle();
 
     // Comprobar que hemos cambiado de página
     //expect(find.byType(RaisedButton), findsOneWidget);
-    expect(find.text("¡El producto se ha comprado con éxito!"), findsOneWidget);
+    expect(find.text("Comprar producto"), findsOneWidget);
 
-    // Volvemos a la página principal
-    expect(find.byType(RaisedButton), findsOneWidget);
-    await tester.tap(find.byType(RaisedButton)); // Pulsamos el botón
-    await tester.pumpAndSettle();
-
-    // Comprobamos que hemos vuelto a la página principal
-    expect(find.text('Cuadro Mona Lisa'), findsOneWidget); // Debe encontrar uno
   });
 
 
@@ -123,11 +137,24 @@ void main() {
     // Asignamos las claves (keys)
     const dist = Key('sliderDistancia');
     const precio = Key('sliderPrecio');
+    const usr = Key('username');
+    const pwd = Key('password');
 
     // Build our app and trigger a frame.
     tester.binding.window.physicalSizeTestValue = const Size(720, 1280);
     tester.binding.window.devicePixelRatioTestValue = 1.0;
     await tester.pumpWidget(MyApp(vista, controlador));
+
+    //Iniciar sesion como admin
+    expect(find.byKey(usr), findsOneWidget); // Debe encontrar uno
+    await tester.enterText(find.byKey(usr), 'AlexCollado'); // Introducimos el usuario
+    
+    expect(find.byKey(pwd), findsOneWidget); // Debe encontrar uno
+    await tester.enterText(find.byKey(pwd), '12345'); // Introducimos la contraseña
+
+    expect(find.text("Iniciar sesión"), findsOneWidget);
+    await tester.tap(find.text("Iniciar sesión")); // Pulsamos el botón
+    await tester.pumpAndSettle();
 
     // Comprobamos que los productos estén en la página principal
     expect(find.text('Escultura de Dios'), findsOneWidget);
@@ -171,15 +198,28 @@ void main() {
 
   testWidgets('Prueba estado de productos', (WidgetTester tester) async {
 
+    const usr = Key('username');
+    const pwd = Key('password');
+
     // Build our app and trigger a frame.
     tester.binding.window.physicalSizeTestValue = const Size(720, 1280);
     tester.binding.window.devicePixelRatioTestValue = 1.0;
     await tester.pumpWidget(MyApp(vista, controlador));
 
+    //Iniciar sesion como admin
+    expect(find.byKey(usr), findsOneWidget); // Debe encontrar uno
+    await tester.enterText(find.byKey(usr), 'AlexCollado'); // Introducimos el usuario
+    
+    expect(find.byKey(pwd), findsOneWidget); // Debe encontrar uno
+    await tester.enterText(find.byKey(pwd), '12345'); // Introducimos la contraseña
+
+    expect(find.text("Iniciar sesión"), findsOneWidget);
+    await tester.tap(find.text("Iniciar sesión")); // Pulsamos el botón
+    await tester.pumpAndSettle();
+
     // Comprobamos que los productos estén en la página principal
     expect(find.text('Cuadro casero'), findsOneWidget);
     expect(find.text('Lapiz roto robado'), findsOneWidget);
-    expect(find.text('Escultura David'), findsOneWidget);
 
     // Filtramos por estado: roto
     expect(find.text('Roto'), findsOneWidget);
@@ -198,4 +238,5 @@ void main() {
     expect(find.text('Estado: Nuevo'), findsNothing);
 
   });
+
 }

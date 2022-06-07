@@ -68,6 +68,7 @@ class _EstadoInicio extends State<Inicio> {
                               margin: const EdgeInsets.only(
                                   top: 15, bottom: 2.5, right: 10, left: 10),
                               child: TextFormField(
+                                key: const Key('username'),
                                 decoration: const InputDecoration(
                                     border: OutlineInputBorder(),
                                     labelText: 'Usuario',
@@ -89,6 +90,7 @@ class _EstadoInicio extends State<Inicio> {
                               margin: const EdgeInsets.only(
                                   top: 2.5, bottom: 5, right: 10, left: 10),
                               child: TextFormField(
+                                key: const Key('password'),
                                 decoration: const InputDecoration(
                                     border: OutlineInputBorder(),
                                     labelText: 'Contraseña',

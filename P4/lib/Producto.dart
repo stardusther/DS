@@ -96,4 +96,12 @@ class Producto {
 
     return resultado;
   }
+
+  void asignarEstado(EstadoProducto e){
+    _estado = e;
+  }
+
+  void asignarTipo(TipoProducto t){
+    _tipoProducto = t;
+  }
 }
