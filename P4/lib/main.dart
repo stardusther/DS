@@ -14,6 +14,7 @@ import 'FiltroEstadoProducto.dart';
 import 'FiltroTipoProducto.dart';
 import 'Controlador.dart';
 import 'WidgetMyApp.dart';
+import 'API.dart';
 
 import 'package:flutter/material.dart';
 
@@ -35,14 +36,19 @@ void main() {
   cliente.setGestorFiltros = gestorFiltros;
 
   // Crear controlador y vista. Sobre el controlador haremos peticiones y sobre la vista veremos los resultados
-  Controlador controlador = new Controlador(cliente, []); //No enviamos productos. Cuando iniciemos sesion cargamos los productos
-  VistaModelo vista = new VistaModelo.sinLista(objetivo); //Constructor sin lista
+  Controlador controlador = new Controlador(cliente,
+      []); //No enviamos productos. Cuando iniciemos sesion cargamos los productos
+  VistaModelo vista =
+      new VistaModelo.sinLista(objetivo); //Constructor sin lista
 
   //Creamos filtros
   List<int> listaFiltro1 = [];
   List<int> listaFiltro2 = [];
   List<int> listaFiltro3 = [];
   List<int> listaFiltro4 = [];
+
+  API.getUsernamesFuture(); //Los cargamos en el inicio para no tener que esperar
+  API.getProductosFuture(); 
 
   /*
   //Modificamos los valores para los filtros que le pasaremos al controlador

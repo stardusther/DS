@@ -63,5 +63,37 @@ class Producto {
   }*/
   //Opcion 2 resumido
   Producto(this._precio, this._distancia, this._nombre, this._descripcion,
-      this._tipoProducto, this._estado);
+      this._tipoProducto, this._estado, this._id_producto);
+
+  static TipoProducto tipoJSON(String cadena) {
+    TipoProducto resultado = TipoProducto.cuadro; //por defecto cuadro
+
+    if (cadena == 'lienzo') {
+      resultado = TipoProducto.lienzo;
+    } else if (cadena == 'pincel') {
+      resultado = TipoProducto.pincel;
+    } else if (cadena == 'lapices') {
+      resultado = TipoProducto.lapices;
+    } else if (cadena == 'caballete') {
+      resultado = TipoProducto.caballete;
+    } else if (cadena == 'escultura') {
+      resultado = TipoProducto.escultura;
+    }
+
+    return resultado;
+  }
+
+  static EstadoProducto estadoJSON(String cad) {
+    EstadoProducto resultado = EstadoProducto.nuevo; //por defecto
+
+    if (cad == 'roto') {
+      resultado = EstadoProducto.roto;
+    } else if (cad == 'excelente') {
+      resultado = EstadoProducto.excelente;
+    } else if (cad == 'bueno') {
+      resultado = EstadoProducto.bueno;
+    }
+
+    return resultado;
+  }
 }

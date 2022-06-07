@@ -32,15 +32,14 @@ class VistaModelo {
     return _catalogo_final;
   }
 
-  void finPrimeraVez(){
+  void finPrimeraVez() {
     primera_vez = false;
   }
 
   List<Producto> getProductosFiltrados() {
     if (_objetivo!.catalogo_final.isNotEmpty)
       _actualizarProductos();
-    else if(!primera_vez)
-      return [];
+    else if (!primera_vez) return [];
 
     return _catalogo_final;
   }
@@ -73,12 +72,10 @@ class VistaModelo {
       resultado = "Pincel";
     } else if (cadena == 'TipoProducto.lapices') {
       resultado = "Lapices";
-    } else if (cadena == 'TipoProducto.cuadro') {
+    } else if (cadena == 'TipoProducto.caballete') {
       resultado = "Caballete";
-    } else if (cadena == 'TipoProducto.cuadro') {
+    } else if (cadena == 'TipoProducto.escultura') {
       resultado = "Escultura";
-    } else if (cadena == 'TipoProducto.cuadro') {
-      resultado = "Pinturas";
     }
 
     return resultado;
@@ -92,8 +89,7 @@ class VistaModelo {
     List<Widget> lista_widget = [];
     Widget tmp;
 
-    if (_objetivo!.catalogo_final
-        .isNotEmpty) {
+    if (_objetivo!.catalogo_final.isNotEmpty) {
       _actualizarProductos();
     }
 

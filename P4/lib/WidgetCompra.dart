@@ -48,11 +48,11 @@ class WidgetCompra extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment
                           .center, //Center Row contents horizontally,
                       children: [
-                        const Text("¡El producto \""),
+                        const Text("¡Se compró \""),
                         Text(_producto.nombre,
                             style:
                                 const TextStyle(fontWeight: FontWeight.bold)),
-                        const Text("\" se ha comprado con éxito!"),
+                        const Text("\" con éxito!"),
                       ],
                     ),
                   ),

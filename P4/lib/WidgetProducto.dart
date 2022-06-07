@@ -64,12 +64,17 @@ class WidgetProducto extends StatelessWidget {
                     margin: const EdgeInsets.only(
                         top: 0, bottom: 5, right: 10, left: 10),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment
-                          .center, //Center Row contents horizontally,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text("Descripcion: ",
                             style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(_producto.descripcion),
+                        Column(
+                          children: [                        
+                            Container(
+                              child: Text(_producto.descripcion),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

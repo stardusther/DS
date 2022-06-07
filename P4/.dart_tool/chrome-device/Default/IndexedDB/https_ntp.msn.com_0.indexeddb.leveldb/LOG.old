@@ -1,11 +1,7 @@
-2022/06/04-20:02:14.054 474c Reusing MANIFEST C:\Users\Zuki\AppData\Local\Temp\flutter_tools.4855ef3d\flutter_tools_chrome_device.f18b54dc\Default\IndexedDB\https_ntp.msn.com_0.indexeddb.leveldb/MANIFEST-000001
-2022/06/04-20:02:14.055 474c Recovering log #7
-2022/06/04-20:02:14.055 474c Reusing old log C:\Users\Zuki\AppData\Local\Temp\flutter_tools.4855ef3d\flutter_tools_chrome_device.f18b54dc\Default\IndexedDB\https_ntp.msn.com_0.indexeddb.leveldb/000007.log 
-2022/06/04-20:02:14.056 474c Delete type=0 #3
-2022/06/04-20:02:14.056 474c Delete type=0 #4
-2022/06/04-20:02:14.086 474c Compacting 1@1 + 1@2 files
-2022/06/04-20:02:14.105 474c Generated table #10@1: 467 keys, 612715 bytes
-2022/06/04-20:02:14.105 474c Compacted 1@1 + 1@2 files => 612715 bytes
-2022/06/04-20:02:14.106 474c compacted to: files[ 0 0 1 0 0 0 0 ]
-2022/06/04-20:02:14.107 474c Delete type=2 #5
-2022/06/04-20:02:14.107 474c Delete type=2 #8
+2022/06/06-23:33:37.629 34c8 Reusing MANIFEST C:\Users\Zuki\AppData\Local\Temp\flutter_tools.2ae57d4c\flutter_tools_chrome_device.6d791eff\Default\IndexedDB\https_ntp.msn.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/06/06-23:33:37.631 34c8 Recovering log #7
+2022/06/06-23:33:37.633 34c8 Reusing old log C:\Users\Zuki\AppData\Local\Temp\flutter_tools.2ae57d4c\flutter_tools_chrome_device.6d791eff\Default\IndexedDB\https_ntp.msn.com_0.indexeddb.leveldb/000007.log 
+2022/06/06-23:33:37.634 34c8 Delete type=0 #3
+2022/06/06-23:33:37.634 34c8 Delete type=0 #4
+2022/06/06-23:33:37.634 34c8 Delete type=2 #5
+2022/06/06-23:33:37.634 34c8 Delete type=2 #8
